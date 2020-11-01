@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExtraOptions, PreloadAllModules, RouterModule } from '@angular/router';
@@ -12,17 +12,18 @@ import { mockDataServices } from 'app/data/mock';
 import { LayoutModule } from 'app/layout/layout.module';
 import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
+import { GlobalErrorHandler } from './services/error.handler';
 
 const routerConfig: ExtraOptions = {
     scrollPositionRestoration: 'enabled',
-    preloadingStrategy       : PreloadAllModules
+    preloadingStrategy: PreloadAllModules
 };
 
 @NgModule({
     declarations: [
         AppComponent
     ],
-    imports     : [
+    imports: [
         BrowserModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(appRoutes, routerConfig),
@@ -41,10 +42,13 @@ const routerConfig: ExtraOptions = {
         // 3rd party modules
         MarkdownModule.forRoot({})
     ],
-    bootstrap   : [
+    bootstrap: [
         AppComponent
+    ],
+    providers: [
+        GlobalErrorHandler,
+        { provide: ErrorHandler, useClass: GlobalErrorHandler },
     ]
 })
-export class AppModule
-{
+export class AppModule {
 }
