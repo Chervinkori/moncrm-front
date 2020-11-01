@@ -72,10 +72,9 @@ export const appRoutes: Route[] = [
 
             // Example
             {path: 'example', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule)},
-
-            // 404 & Catch all
-            // {path: '404-not-found', pathMatch: 'full', loadChildren: () => import('app/modules/admin/pages/errors/error-404/error-404.module').then(m => m.Error404Module)},
-            // {path: '**', redirectTo: '404-not-found'}
         ]
-    }
+    },
+
+    {path: '404-not-found', pathMatch: 'full', loadChildren: () => import('app/modules/admin/pages/errors/error-404/error-404.module').then(m => m.Error404Module)},
+    {path: '**', redirectTo: '404-not-found'}
 ];
