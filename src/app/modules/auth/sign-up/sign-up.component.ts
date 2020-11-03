@@ -3,16 +3,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { TreoAnimations } from '@treo/animations';
 import { AuthService } from 'app/core/auth/auth.service';
+import { ErrorResponse, ISuccessResponse } from '@interfaces/response.interface';
+import { ISignUpSuccessResponseDto } from '@core/auth/auth.dto';
 
 @Component({
-    selector     : 'auth-sign-up',
-    templateUrl  : './sign-up.component.html',
-    styleUrls    : ['./sign-up.component.scss'],
+    selector: 'auth-sign-up',
+    templateUrl: './sign-up.component.html',
+    styleUrls: ['./sign-up.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations   : TreoAnimations
+    animations: TreoAnimations
 })
-export class AuthSignUpComponent implements OnInit, OnDestroy
-{
+export class AuthSignUpComponent implements OnInit, OnDestroy {
     message: any;
     signUpForm: FormGroup;
 
@@ -28,8 +29,7 @@ export class AuthSignUpComponent implements OnInit, OnDestroy
     constructor(
         private _authService: AuthService,
         private _formBuilder: FormBuilder
-    )
-    {
+    ) {
         // Set the defaults
         this.message = null;
 
@@ -44,24 +44,22 @@ export class AuthSignUpComponent implements OnInit, OnDestroy
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         // Create the form
         this.signUpForm = this._formBuilder.group({
-                name      : ['', Validators.required],
-                email     : ['', [Validators.required, Validators.email]],
-                password  : ['', Validators.required],
-                company   : [''],
-                agreements: ['', Validators.requiredTrue]
-            }
+            name: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', Validators.required],
+            company: [''],
+            agreements: ['', Validators.requiredTrue]
+        }
         );
     }
 
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
@@ -74,19 +72,17 @@ export class AuthSignUpComponent implements OnInit, OnDestroy
     /**
      * Sign up
      */
-    signUp(): void
-    {
+    signUp(): void {
         // Do nothing if the form is invalid
-        if ( this.signUpForm.invalid )
-        {
+        if (this.signUpForm.invalid) {
             this.signUpForm.markAllAsTouched();
             // Show the message
             this.message = {
                 appearance: 'outline',
-                content   : 'Error',
-                shake     : true,
-                showIcon  : false,
-                type      : 'error'
+                content: 'Ошибка заполнения формы регистрации',
+                shake: true,
+                showIcon: false,
+                type: 'error'
             };
             return;
         }
@@ -97,25 +93,25 @@ export class AuthSignUpComponent implements OnInit, OnDestroy
         // Hide the message
         this.message = null;
 
-        // Do your action here...
-
-        // Emulate server delay
-        setTimeout(() => {
-
-            // Re-enable the form
+        this._authService.signUp(this.signUpForm.value).subscribe((response: ISuccessResponse<ISignUpSuccessResponseDto>) => {
             this.signUpForm.enable();
-
-            // Reset the form
-            this.signUpForm.reset({});
-
-            // Show the message
+            this.signUpForm.reset();
             this.message = {
                 appearance: 'outline',
-                content   : 'Your account has been created and a confirmation mail has been sent to your email address.',
-                shake     : false,
-                showIcon  : false,
-                type      : 'success'
+                content: `Аккаунт зарегистрирован. На почту по адресу ${response.data.email} выслано письмо для подтверждения`,
+                shake: true,
+                showIcon: false,
+                type: 'success'
             };
-        }, 1000);
+        }, (error: ErrorResponse) => {
+            this.signUpForm.enable();
+            this.message = {
+                appearance: 'outline',
+                content: error.title,
+                shake: true,
+                showIcon: false,
+                type: 'error'
+            };
+        })
     }
 }

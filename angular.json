@@ -75,6 +75,34 @@
                                     "maximumError": "150kb"
                                 }
                             ]
+                        },
+                        "dev": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.dev.ts"
+                                }
+                            ],
+                            "optimization": false,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "5mb",
+                                    "maximumError": "8mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "100kb",
+                                    "maximumError": "150kb"
+                                }
+                            ]
                         }
                     }
                 },
@@ -86,6 +114,9 @@
                     "configurations": {
                         "production": {
                             "browserTarget": "treo:build:production"
+                        },
+                        "dev": {
+                            "browserTarget": "treo:build:dev"
                         }
                     }
                 },

@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
+import { catchError, retry, switchMap } from 'rxjs/operators';
 import { AuthUtils } from 'app/core/auth/auth.utils';
+import { environment } from '@env/environment';
+import { ISuccessResponse } from '@interfaces/response.interface';
+import { ISignUpSuccessResponseDto } from './auth.dto';
 
 @Injectable()
 export class AuthService
@@ -72,6 +75,10 @@ export class AuthService
         );
     }
 
+    signUp(credentials: { name: string, email: string, password: string, company: string, agreements: boolean }): Observable<ISuccessResponse<ISignUpSuccessResponseDto>> {
+        return this._httpClient.post<ISuccessResponse<ISignUpSuccessResponseDto>>(environment.apiUrl + '/auth/register', credentials);
+    }
+
     /**
      * Sign in using the access token
      */
@@ -120,9 +127,9 @@ export class AuthService
             return of(false);
         }
 
-        if (60 >= "кол-во минут до просрочки") {
-            return this.signInUsingToken();
-        }
+        // if (60 >= "кол-во минут до просрочки") {
+        //     return this.signInUsingToken();
+        // }
 
         // If the access token exists and it didn't expire, sign in using it
         return of(true);
