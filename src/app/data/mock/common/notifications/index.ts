@@ -53,10 +53,10 @@ export class NotificationsMockApi implements TreoMockApi
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Notifications - PUT
+        // @ Notifications - POST
         // -----------------------------------------------------------------------------------------------------
         this._treoMockApiService
-            .onPut('api/common/notifications')
+            .onPost('api/common/notifications')
             .reply((request) => {
 
                 // Get the notification

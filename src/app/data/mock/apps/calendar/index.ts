@@ -128,10 +128,10 @@ export class CalendarMockApi implements TreoMockApi
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Calendars - PUT
+        // @ Calendars - POST
         // -----------------------------------------------------------------------------------------------------
         this._treoMockApiService
-            .onPut('api/apps/calendar/calendars')
+            .onPost('api/apps/calendar/calendars')
             .reply((request) => {
 
                 // Get the calendar as the new calendar
@@ -313,10 +313,10 @@ export class CalendarMockApi implements TreoMockApi
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Event - PUT
+        // @ Event - POST
         // -----------------------------------------------------------------------------------------------------
         this._treoMockApiService
-            .onPut('api/apps/calendar/event')
+            .onPost('api/apps/calendar/event')
             .reply((request) => {
 
                 // Get the event as the new event

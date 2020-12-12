@@ -54,7 +54,7 @@ export class TreoMessageComponent implements OnInit, OnDestroy
         // Set the defaults
         this.afterDismissed = new EventEmitter<boolean>();
         this.afterShown = new EventEmitter<boolean>();
-        this.appearance = 'fill';
+        this.appearance = 'soft';
         this.dismissed = null;
         this.showIcon = true;
         this.type = 'primary';

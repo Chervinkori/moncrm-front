@@ -64,7 +64,7 @@ export class MessagesService
     {
         return this.messages$.pipe(
             take(1),
-            switchMap(messages => this._httpClient.put<Message>('api/common/messages', {message}).pipe(
+            switchMap(messages => this._httpClient.post<Message>('api/common/messages', {message}).pipe(
                 map((newMessage) => {
 
                     // Update the messages with the new message

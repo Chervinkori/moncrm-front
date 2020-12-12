@@ -74,7 +74,7 @@ export class TreoVerticalNavigationCollapsableItemComponent implements OnInit, O
         this._treoVerticalNavigationComponent = this._treoNavigationService.getComponent(this.name);
 
         // If the item has a children that has a matching url with the current url, expand...
-        if ( this._hasCurrentUrlInChildren(this.item, this._router.url) )
+        if ( this._hasCurrentUrlAsChildren(this.item, this._router.url) )
         {
             this.expand();
         }
@@ -126,7 +126,7 @@ export class TreoVerticalNavigationCollapsableItemComponent implements OnInit, O
                     }
 
                     // Check if this has a children with a matching url with the current active url
-                    if ( this._hasCurrentUrlInChildren(this.item, this._router.url) )
+                    if ( this._hasCurrentUrlAsChildren(this.item, this._router.url) )
                     {
                         return;
                     }
@@ -151,7 +151,7 @@ export class TreoVerticalNavigationCollapsableItemComponent implements OnInit, O
             .subscribe((event: NavigationEnd) => {
 
                 // If the item has a children that has a matching url with the current url, expand...
-                if ( this._hasCurrentUrlInChildren(this.item, event.urlAfterRedirects) )
+                if ( this._hasCurrentUrlAsChildren(this.item, event.urlAfterRedirects) )
                 {
                     this.expand();
                 }
@@ -198,7 +198,7 @@ export class TreoVerticalNavigationCollapsableItemComponent implements OnInit, O
      * @param url
      * @private
      */
-    private _hasCurrentUrlInChildren(item, url): boolean
+    private _hasCurrentUrlAsChildren(item, url): boolean
     {
         const children = item.children;
 
@@ -211,7 +211,7 @@ export class TreoVerticalNavigationCollapsableItemComponent implements OnInit, O
         {
             if ( child.children )
             {
-                if ( this._hasCurrentUrlInChildren(child, url) )
+                if ( this._hasCurrentUrlAsChildren(child, url) )
                 {
                     return true;
                 }

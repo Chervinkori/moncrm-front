@@ -65,7 +65,7 @@ export class ShortcutsService
     {
         return this.shortcuts$.pipe(
             take(1),
-            switchMap(shortcuts => this._httpClient.put<Shortcut>('api/common/shortcuts', {shortcut}).pipe(
+            switchMap(shortcuts => this._httpClient.post<Shortcut>('api/common/shortcuts', {shortcut}).pipe(
                 map((newShortcut) => {
 
                     // Update the shortcuts with the new shortcut

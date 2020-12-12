@@ -99,10 +99,11 @@ classy-layout {
             .logo {
                 display: flex;
                 align-items: center;
+                justify-content: center;
                 height: 64px;
                 min-height: 64px;
                 max-height: 64px;
-                padding: 0 24px;
+                padding: 0 24px 0 8px;
                 margin: 8px 0 16px 0;
                 opacity: 0.12;
 
@@ -137,33 +138,6 @@ classy-layout {
 
             .navigation-toggle-button {
                 margin-right: 8px;
-            }
-
-            .message {
-                display: flex;
-                align-items: center;
-                margin: 0 32px 0 8px;
-                line-height: 1;
-
-                @include treo-breakpoint('lt-md') {
-                    display: none;
-                }
-
-                .mat-icon {
-                    margin-right: 8px;
-                }
-
-                a {
-                    display: flex;
-                    align-items: center;
-
-                    .mat-icon {
-                        margin-left: 4px;
-                        color: currentColor !important;
-                        @include treo-icon-size(16);
-                    }
-                }
-
             }
 
             .spacer {

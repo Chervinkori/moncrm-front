@@ -43,7 +43,7 @@ treo-drawer {
 
         // Side mode
         &.treo-drawer-mode-side {
-            margin-left: #{$treo-drawer-width}px;
+            margin-left: -#{$treo-drawer-width}px;
 
             &.treo-drawer-opened {
                 margin-left: 0;

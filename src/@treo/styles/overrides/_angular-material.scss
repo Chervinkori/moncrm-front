@@ -1091,7 +1091,6 @@ textarea.mat-input-element {
     // -----------------------------------------------------------------------------------------------------
     // @ Form fields
     // -----------------------------------------------------------------------------------------------------
-
     .mat-form-field.mat-form-field-appearance-fill {
 
         .mat-form-field-label {
@@ -1102,86 +1101,44 @@ textarea.mat-input-element {
             color: map-get($foreground, hint-text);
         }
 
-        // Border color on disabled fields
+        // Disabled
         &.mat-form-field-disabled {
-
-            .mat-form-field-wrapper {
-
-                .mat-form-field-flex {
-                    @if ($is-dark) {
-                        border-color: treo-color('cool-gray', 700);
-                    } @else {
-                        border-color: treo-color('cool-gray', 200);
-                    }
-                }
-            }
+            opacity: 0.7 !important;
         }
 
-
-        // Border color on invalid fields
+        // Invalid
         &.mat-form-field-invalid {
 
             .mat-form-field-wrapper {
 
+                // Border color
                 .mat-form-field-flex {
                     border-color: map-get($warn, default);
                 }
             }
         }
 
-        // Background color on focused fields
+        // Focused
         &.mat-focused {
 
             .mat-form-field-wrapper {
 
+                // Background color
                 .mat-form-field-flex {
                     background-color: map-get($background, card);
                 }
             }
         }
 
-        // Border color on focused and valid fields
+        // Focused and valid fields
         &.mat-focused:not(.mat-form-field-invalid) {
 
             .mat-form-field-wrapper {
 
+                // Border color
                 .mat-form-field-flex {
                     border-color: map-get($primary, default);
                 }
-            }
-        }
-
-        // Placeholder
-        &.mat-form-field-hide-placeholder {
-
-            // Normal inputs
-            .mat-input-element {
-
-                &::placeholder {
-                    color: map-get($foreground, hint-text) !important;
-                    -webkit-text-fill-color: currentColor !important;
-                }
-
-                &::-moz-placeholder {
-                    color: map-get($foreground, hint-text) !important;
-                    -webkit-text-fill-color: currentColor !important;
-                }
-
-                &::-webkit-input-placeholder {
-                    color: map-get($foreground, hint-text) !important;
-                    -webkit-text-fill-color: currentColor !important;
-                }
-
-                &:-ms-input-placeholder {
-                    color: map-get($foreground, hint-text) !important;
-                    -webkit-text-fill-color: currentColor !important;
-                }
-            }
-
-            // Select
-            .mat-select-placeholder {
-                color: map-get($foreground, hint-text) !important;
-                -webkit-text-fill-color: currentColor !important;
             }
         }
 
@@ -1202,7 +1159,6 @@ textarea.mat-input-element {
                 }
             }
         }
-
 
         .mat-form-field-wrapper {
 
@@ -1272,12 +1228,12 @@ textarea.mat-input-element {
         }
     }
 
-    // If inside an invalid form field
+    // Invalid
     .mat-form-field-invalid {
 
         .mat-input-element {
 
-            // Placeholder color (error)
+            // Placeholder color
             &::placeholder {
                 color: map-get($warn, default);
             }
@@ -1307,12 +1263,15 @@ textarea.mat-input-element {
         }
     }
 
-    // If inside an invalid form
+    // Invalid
     .mat-form-field-invalid {
 
-        // Placeholder color (error)
-        .mat-select-placeholder {
-            color: map-get($warn, default);
+        .mat-select {
+
+            // Placeholder color
+            .mat-select-placeholder {
+                color: map-get($warn, default);
+            }
         }
     }
 

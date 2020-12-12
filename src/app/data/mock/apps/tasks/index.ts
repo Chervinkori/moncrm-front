@@ -54,10 +54,10 @@ export class TasksMockApi implements TreoMockApi
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Tags - PUT
+        // @ Tags - POST
         // -----------------------------------------------------------------------------------------------------
         this._treoMockApiService
-            .onPut('api/apps/tasks/tag')
+            .onPost('api/apps/tasks/tag')
             .reply((request) => {
 
                 // Get the tag
@@ -250,10 +250,10 @@ export class TasksMockApi implements TreoMockApi
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Task - PUT
+        // @ Task - POST
         // -----------------------------------------------------------------------------------------------------
         this._treoMockApiService
-            .onPut('api/apps/tasks/task')
+            .onPost('api/apps/tasks/task')
             .reply((request) => {
 
                 // Generate a new task

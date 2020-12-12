@@ -158,10 +158,10 @@ export class MailboxMockApi implements TreoMockApi
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Labels - PUT
+        // @ Labels - POST
         // -----------------------------------------------------------------------------------------------------
         this._treoMockApiService
-            .onPut('api/apps/mailbox/label')
+            .onPost('api/apps/mailbox/label')
             .reply((request) => {
 
                 // Get the label

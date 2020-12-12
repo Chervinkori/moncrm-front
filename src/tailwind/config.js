@@ -4,6 +4,17 @@ const {colors} = require('tailwindcss/defaultTheme');
 
 module.exports = {
 
+    // Experimental
+    experimental: {
+        applyComplexClasses : true,
+        extendedSpacingScale: true
+    },
+
+    // Future
+    future: {
+        removeDeprecatedGapUtilities: true
+    },
+
     // PurgeCSS
     purge: false,
 
@@ -228,97 +239,71 @@ module.exports = {
                 min: '1280px'
             }
         },
-        sizes   : theme => ({
-            // Sizes are used in width & height helpers
-            ...theme('spacing'),
-            '50'   : '12.5rem',
-            '60'   : '15rem',
-            '80'   : '20rem',
-            '90'   : '24rem',
-            '100'  : '25rem',
-            '120'  : '30rem',
-            '128'  : '32rem',
-            '140'  : '35rem',
-            '160'  : '40rem',
-            '180'  : '45rem',
-            '192'  : '48rem',
-            '200'  : '50rem',
-            '240'  : '60rem',
-            '256'  : '64rem',
-            '280'  : '70rem',
-            '320'  : '80rem',
-            '360'  : '90rem',
-            '400'  : '100rem',
-            '480'  : '120rem',
-            '1/2'  : '50%',
-            '1/3'  : '33.33333%',
-            '2/3'  : '66.66667%',
-            '1/4'  : '25%',
-            '2/4'  : '50%',
-            '3/4'  : '75%',
-            '1/5'  : '20%',
-            '2/5'  : '40%',
-            '3/5'  : '60%',
-            '4/5'  : '80%',
-            '1/12' : '8.33333%',
-            '2/12' : '16.66667%',
-            '3/12' : '25%',
-            '4/12' : '33.33333%',
-            '5/12' : '41.66667%',
-            '6/12' : '50%',
-            '7/12' : '58.33333%',
-            '8/12' : '66.66667%',
-            '9/12' : '75%',
-            '10/12': '83.33333%',
-            '11/12': '91.66667%'
-        }),
         // Extending default configurations
         extend  : {
             /*
-                // Once TailwindCSS adds the above colors to their default config,
-                // this code will be used for generating the default colors
-                // and the theme.colors object will be removed from above
-                colors    : theme => {
-                    // Extend the colors to add 'default' values that uses the hue 500.
-                    // This will generate utilities like 'text-indigo' or 'bg-red',
-                    // which will be defaulted to the hue 500 of that color palette.
-                    const defaultColors = colors;
+            // Once TailwindCSS adds the above colors to their default config,
+            // this code will be used for generating the default colors
+            // and the theme.colors object will be removed from above
+            colors: theme =>
+            {
+                const defaultColors = colors;
 
-                    forEach(defaultColors, (value, key) => {
-                        if ( isObject(value) )
-                        {
-                            defaultColors[key]['default'] = defaultColors[key]['500']
-                        }
-                    });
-                    return defaultColors;
-                },
-            */
+                // Add 'cool-gray' palette
+                defaultColors['cool-gray'] = {
+                    '50' : '#FBFDFE',
+                    '100': '#F1F5F9',
+                    '200': '#E2E8F0',
+                    '300': '#CFD8E3',
+                    '400': '#97A6BA',
+                    '500': '#64748B',
+                    '600': '#475569',
+                    '700': '#364152',
+                    '800': '#27303F',
+                    '900': '#1A202E'
+                };
 
-            /*
-                // Use this map to define custom contrasting colors for the custom colors
-                colorContrasts: theme => ({
-                    brand-color: {
-                        50     : theme('colors.brand-color.900'), // Use the 900 from the 'brand-color' palette as the contrasting color of the 50
-                        100    : theme('colors.brand-color.900'),
-                        200    : theme('colors.brand-color.900'),
-                        300    : theme('colors.brand-color.900'),
-                        400    : theme('colors.brand-color.900'),
-                        500    : theme('colors.brand-color.900'),
-                        600    : theme('colors.brand-color.50'),
-                        700    : theme('colors.brand-color.50'),
-                        800    : theme('colors.brand-color.50'),
-                        900    : theme('colors.brand-color.50'),
-                        default: theme('colors.brand-color.900')
+                // Extend the colors to add 'default' values that uses the hue 500.
+                // This will generate utilities like 'text-indigo' or 'bg-red',
+                // which will be defaulted to the hue 500 of that color palette.
+                forEach(defaultColors, (value, key) =>
+                {
+                    if ( isObject(value) )
+                    {
+                        defaultColors[key]['default'] = defaultColors[key]['500'];
                     }
-                },
+                });
+
+                // Return the colors
+                return defaultColors;
+            },
             */
 
             /*
-                // Use this map to extend the iconSize utility sizes
-                iconSize: {
-                    8: '8px',
-                    10: '10px'
-                },
+            // Use this map to define custom contrasting colors for the custom colors
+            colorContrasts: theme => ({
+                brand-color: {
+                    50     : theme('colors.brand-color.900'), // Use the 900 from the 'brand-color' palette as the contrasting color of the 50
+                    100    : theme('colors.brand-color.900'),
+                    200    : theme('colors.brand-color.900'),
+                    300    : theme('colors.brand-color.900'),
+                    400    : theme('colors.brand-color.900'),
+                    500    : theme('colors.brand-color.900'),
+                    600    : theme('colors.brand-color.50'),
+                    700    : theme('colors.brand-color.50'),
+                    800    : theme('colors.brand-color.50'),
+                    900    : theme('colors.brand-color.50'),
+                    default: theme('colors.brand-color.900')
+                }
+            },
+            */
+
+            /*
+            // Use this map to extend the iconSize utility sizes
+            iconSize: {
+                8: '8px',
+                10: '10px'
+            },
             */
 
             boxShadow : {
@@ -329,7 +314,7 @@ module.exports = {
             },
             fontFamily: {
                 sans: [
-                    'Inter',
+                    'Inter var',
                     'system-ui',
                     '-apple-system',
                     'BlinkMacSystemFont',
@@ -370,13 +355,27 @@ module.exports = {
             },
             spacing   : {
                 '2px': '2px',
-                '14' : '3.5rem',
                 '18' : '4.5rem',
                 '22' : '5.5rem',
                 '26' : '6.5rem',
-                '28' : '7rem',
                 '30' : '7.5rem',
-                '36' : '9rem'
+                '50' : '12.5rem',
+                '90' : '24rem',
+                '100': '25rem',
+                '120': '30rem',
+                '128': '32rem',
+                '140': '35rem',
+                '160': '40rem',
+                '180': '45rem',
+                '192': '48rem',
+                '200': '50rem',
+                '240': '60rem',
+                '256': '64rem',
+                '280': '70rem',
+                '320': '80rem',
+                '360': '90rem',
+                '400': '100rem',
+                '480': '120rem'
             },
             zIndex    : {
                 '-1'   : -1,
@@ -389,42 +388,114 @@ module.exports = {
                 '9999' : 9999,
                 '99999': 99999
             },
-            maxHeight : theme => ({
-                none: 'none',
-                ...theme('sizes')
-            }),
             minHeight : theme => ({
-                ...theme('sizes')
+                ...theme('spacing')
             }),
-            height    : theme => ({
-                ...theme('sizes')
+            maxHeight : {
+                none: 'none'
+            },
+            minWidth  : theme => ({
+                screen: '100vw',
+                ...theme('spacing')
             }),
             maxWidth  : theme => ({
                 screen: '100vw',
-                ...theme('sizes')
-            }),
-            minWidth  : theme => ({
-                screen: '100vw',
-                ...theme('sizes')
-            }),
-            width     : theme => ({
-                ...theme('sizes')
+                ...theme('spacing')
             })
         }
     },
 
     // Variants
     variants: {
+        accessibility           : ['responsive', 'focus'],
+        alignContent            : ['responsive'],
+        alignItems              : ['responsive'],
+        alignSelf               : ['responsive'],
+        backgroundAttachment    : [],
+        backgroundClip          : [],
         backgroundColor         : ['dark-light'],
+        backgroundImage         : [],
+        gradientColorStops      : [],
+        backgroundOpacity       : [],
+        backgroundPosition      : [],
+        backgroundRepeat        : [],
+        backgroundSize          : [],
+        borderCollapse          : [],
         borderColor             : ['dark-light'],
+        borderOpacity           : [],
+        borderRadius            : ['responsive'],
+        borderStyle             : [],
         borderWidth             : ['responsive', 'first', 'last'],
+        boxShadow               : [],
+        boxSizing               : [],
         cursor                  : [],
+        display                 : ['responsive'],
+        divideColor             : [],
+        divideOpacity           : [],
+        divideStyle             : [],
+        divideWidth             : [],
+        fill                    : [],
+        flex                    : ['responsive'],
+        flexDirection           : ['responsive'],
+        flexGrow                : ['responsive'],
+        flexShrink              : ['responsive'],
+        flexWrap                : ['responsive'],
         fontFamily              : [],
+        fontSize                : ['responsive'],
         fontSmoothing           : [],
+        fontStyle               : [],
         fontWeight              : ['responsive'],
-        iconSize                : ['responsive'],
+        height                  : ['responsive'],
+        inset                   : ['responsive'],
+        justifyContent          : ['responsive'],
+        letterSpacing           : ['responsive'],
+        lineHeight              : ['responsive'],
+        listStylePosition       : [],
+        listStyleType           : [],
+        margin                  : ['responsive'],
+        maxHeight               : ['responsive'],
+        maxWidth                : ['responsive'],
+        minHeight               : ['responsive'],
+        minWidth                : ['responsive'],
+        objectFit               : ['responsive'],
+        objectPosition          : ['responsive'],
+        opacity                 : ['responsive', 'hover', 'focus'],
+        order                   : ['responsive'],
+        outline                 : ['focus'],
+        overflow                : ['responsive'],
+        overscrollBehavior      : ['responsive'],
+        padding                 : ['responsive'],
+        placeholderOpacity      : ['focus'],
+        pointerEvents           : [],
+        position                : ['responsive'],
         resize                  : [],
+        space                   : ['responsive'],
+        stroke                  : [],
+        strokeWidth             : [],
+        tableLayout             : [],
+        textAlign               : ['responsive'],
         textColor               : ['dark-light'],
+        textOpacity             : [],
+        textDecoration          : ['hover', 'focus'],
+        textTransform           : [],
+        userSelect              : [],
+        visibility              : ['responsive'],
+        whitespace              : ['responsive'],
+        width                   : ['responsive'],
+        wordBreak               : ['responsive'],
+        zIndex                  : ['responsive'],
+        gap                     : ['responsive'],
+        gridAutoFlow            : ['responsive'],
+        gridTemplateColumns     : ['responsive'],
+        gridColumn              : ['responsive'],
+        gridColumnStart         : ['responsive'],
+        gridColumnEnd           : ['responsive'],
+        gridTemplateRows        : ['responsive'],
+        gridRow                 : ['responsive'],
+        gridRowStart            : ['responsive'],
+        gridRowEnd              : ['responsive'],
+        transform               : ['responsive'],
+        transformOrigin         : ['responsive'],
         scale                   : [],
         rotate                  : [],
         translate               : [],
@@ -432,15 +503,21 @@ module.exports = {
         transitionProperty      : [],
         transitionTimingFunction: [],
         transitionDuration      : [],
-        transitionDelay         : []
+        transitionDelay         : [],
+        animation               : [],
+
+        // Custom
+        iconSize: ['responsive']
     },
 
     // Core plugins
     corePlugins: {
+        appearance      : false,
         container       : false,
         clear           : false,
         float           : false,
-        placeholderColor: false
+        placeholderColor: false,
+        verticalAlign   : false
     },
 
     // Custom plugins

@@ -16,28 +16,28 @@
         <div class="treo-message-default-icon">
 
             <mat-icon *ngIf="type === 'primary'"
-                      [svgIcon]="'check_circle'"></mat-icon>
+                      [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
 
             <mat-icon *ngIf="type === 'accent'"
-                      [svgIcon]="'check_circle'"></mat-icon>
+                      [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
 
             <mat-icon *ngIf="type === 'warn'"
-                      [svgIcon]="'warning'"></mat-icon>
+                      [svgIcon]="'heroicons_solid:exclamation'"></mat-icon>
 
             <mat-icon *ngIf="type === 'basic'"
-                      [svgIcon]="'check_circle'"></mat-icon>
+                      [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
 
             <mat-icon *ngIf="type === 'info'"
-                      [svgIcon]="'info'"></mat-icon>
+                      [svgIcon]="'heroicons_solid:information-circle'"></mat-icon>
 
             <mat-icon *ngIf="type === 'success'"
-                      [svgIcon]="'check_circle'"></mat-icon>
+                      [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
 
             <mat-icon *ngIf="type === 'warning'"
-                      [svgIcon]="'warning'"></mat-icon>
+                      [svgIcon]="'heroicons_solid:exclamation'"></mat-icon>
 
             <mat-icon *ngIf="type === 'error'"
-                      [svgIcon]="'error'"></mat-icon>
+                      [svgIcon]="'heroicons_solid:x-circle'"></mat-icon>
 
         </div>
 
@@ -47,15 +47,11 @@
     <div class="treo-message-content">
 
         <div class="treo-message-title">
-            <p>
-                <ng-content select="[treoMessageTitle]"></ng-content>
-            </p>
+            <ng-content select="[treoMessageTitle]"></ng-content>
         </div>
 
         <div class="treo-message-message">
-            <p>
-                <ng-content></ng-content>
-            </p>
+            <ng-content></ng-content>
         </div>
 
     </div>

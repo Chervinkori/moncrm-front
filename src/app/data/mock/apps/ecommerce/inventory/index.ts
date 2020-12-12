@@ -185,10 +185,10 @@ export class ECommerceInventoryMockApi implements TreoMockApi
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Product - PUT
+        // @ Product - POST
         // -----------------------------------------------------------------------------------------------------
         this._treoMockApiService
-            .onPut('api/apps/ecommerce/inventory/product')
+            .onPost('api/apps/ecommerce/inventory/product')
             .reply(() => {
 
                 // Generate a new product
@@ -295,10 +295,10 @@ export class ECommerceInventoryMockApi implements TreoMockApi
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Tags - PUT
+        // @ Tags - POST
         // -----------------------------------------------------------------------------------------------------
         this._treoMockApiService
-            .onPut('api/apps/ecommerce/inventory/tag')
+            .onPost('api/apps/ecommerce/inventory/tag')
             .reply((request) => {
 
                 // Get the tag

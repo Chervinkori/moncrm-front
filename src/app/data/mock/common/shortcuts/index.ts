@@ -53,10 +53,10 @@ export class ShortcutsMockApi implements TreoMockApi
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Shortcuts - PUT
+        // @ Shortcuts - POST
         // -----------------------------------------------------------------------------------------------------
         this._treoMockApiService
-            .onPut('api/common/shortcuts')
+            .onPost('api/common/shortcuts')
             .reply((request) => {
 
                 // Get the shortcut

@@ -24,6 +24,7 @@
                         "tsConfig": "tsconfig.app.json",
                         "aot": true,
                         "allowedCommonJsDependencies": [
+                            "apexcharts",
                             "highlight.js",
                             "crypto-js/enc-utf8",
                             "crypto-js/hmac-sha256",
@@ -58,7 +59,6 @@
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
-                            "extractCss": true,
                             "namedChunks": false,
                             "extractLicenses": true,
                             "vendorChunk": false,

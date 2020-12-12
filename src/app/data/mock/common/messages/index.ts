@@ -53,10 +53,10 @@ export class MessagesMockApi implements TreoMockApi
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Messages - PUT
+        // @ Messages - POST
         // -----------------------------------------------------------------------------------------------------
         this._treoMockApiService
-            .onPut('api/common/messages')
+            .onPost('api/common/messages')
             .reply((request) => {
 
                 // Get the message

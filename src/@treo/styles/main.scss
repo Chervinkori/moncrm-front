@@ -20,9 +20,9 @@
 @import 'layout/content';
 
 // 5. Components
+@import 'components/example-viewer';
 @import 'components/card';
 @import 'components/input';
-@import 'components/table';
 
 // 6. Overrides
 @import 'overrides/angular-material';

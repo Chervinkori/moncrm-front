@@ -64,7 +64,7 @@ export class NotificationsService
     {
         return this.notifications$.pipe(
             take(1),
-            switchMap(notifications => this._httpClient.put<Notification>('api/common/notifications', {notification}).pipe(
+            switchMap(notifications => this._httpClient.post<Notification>('api/common/notifications', {notification}).pipe(
                 map((newNotification) => {
 
                     // Update the notifications with the new notification

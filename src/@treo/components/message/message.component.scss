@@ -7,7 +7,7 @@ treo-message {
     &.treo-message-show-icon {
 
         .treo-message-container {
-            padding-left: 56px;
+            //padding-left: 56px;
         }
     }
 
@@ -15,7 +15,7 @@ treo-message {
     &.treo-message-dismissible {
 
         .treo-message-container {
-            padding-right: 56px;
+            //padding-right: 56px;
         }
     }
 
@@ -23,16 +23,18 @@ treo-message {
     .treo-message-container {
         position: relative;
         display: flex;
-        min-height: 64px;
-        padding: 16px 24px;
+        //min-height: 64px;
+        padding: 16px;
         font-size: 14px;
         line-height: 1;
 
         // Icon
         .treo-message-icon {
-            position: absolute;
-            top: 20px;
-            left: 17px;
+            display: flex;
+            align-items: flex-start;
+            //position: absolute;
+            //top: 20px;
+            //left: 17px;
 
             .treo-message-custom-icon,
             .treo-message-default-icon {
@@ -43,6 +45,14 @@ treo-message {
 
                 &:not(:empty) {
                     display: flex;
+                    margin-right: 12px;
+                }
+            }
+
+            .treo-message-default-icon {
+
+                .mat-icon {
+                    @include treo-icon-size(20);
                 }
             }
 
@@ -69,38 +79,38 @@ treo-message {
             // Title
             .treo-message-title {
                 display: none;
-                font-size: 15px;
                 font-weight: 600;
-                line-height: 1.2;
+                line-height: 20px;
 
                 &:not(:empty) {
                     display: block;
-                }
 
-                p {
-                    line-height: 1.625;
+                    // Message that comes after the title
+                    + .treo-message-message {
+
+                        &:not(:empty) {
+                            margin-top: 8px;
+                        }
+                    }
                 }
             }
 
             // Message
             .treo-message-message {
                 display: none;
+                line-height: 20px;
 
                 &:not(:empty) {
                     display: block;
-                }
-
-                p {
-                    line-height: 1.625;
                 }
             }
         }
 
         // Dismiss button
         .treo-message-dismiss-button {
-            position: absolute;
-            top: 12px;
-            right: 12px;
+            //position: absolute;
+            //top: 16px;
+            //right: 12px;
             width: 32px !important;
             min-width: 32px !important;
             height: 32px !important;
@@ -148,17 +158,15 @@ treo-message {
     &.treo-message-appearance-outline {
 
         .treo-message-container {
-            overflow: hidden;
             border-radius: 4px;
+        }
+    }
 
-            &:before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                bottom: 0;
-                width: 6px;
-            }
+    // Soft
+    &.treo-message-appearance-soft {
+
+        .treo-message-container {
+            border-radius: 6px;
         }
     }
 }
@@ -432,6 +440,10 @@ treo-message {
                         background: map-get($primary, 50);
                         color: map-get($primary, 800);
                         box-shadow: inset 0 0 0 1px map-get($primary, 400);
+
+                        .treo-message-icon {
+                            color: map-get($primary, 500);
+                        }
                     }
 
                     code {
@@ -453,6 +465,10 @@ treo-message {
                         background: map-get($accent, 50);
                         color: map-get($accent, 800);
                         box-shadow: inset 0 0 0 1px map-get($accent, 400);
+
+                        .treo-message-icon {
+                            color: map-get($accent, 500);
+                        }
                     }
 
                     code {
@@ -474,6 +490,10 @@ treo-message {
                         background: map-get($warn, 50);
                         color: map-get($warn, 800);
                         box-shadow: inset 0 0 0 1px map-get($warn, 400);
+
+                        .treo-message-icon {
+                            color: map-get($warn, 500);
+                        }
                     }
 
                     code {
@@ -495,6 +515,10 @@ treo-message {
                         background: treo-color('cool-gray', 50);
                         color: treo-color('cool-gray', 800);
                         box-shadow: inset 0 0 0 1px treo-color('cool-gray', 400);
+
+                        .treo-message-icon {
+                            color: treo-color('cool-gray', 500);
+                        }
                     }
 
                     code {
@@ -516,6 +540,10 @@ treo-message {
                         background: treo-color('blue', 50);
                         color: treo-color('blue', 800);
                         box-shadow: inset 0 0 0 1px treo-color('blue', 400);
+
+                        .treo-message-icon {
+                            color: treo-color('blue', 500);
+                        }
                     }
 
                     code {
@@ -537,6 +565,10 @@ treo-message {
                         background: treo-color('green', 50);
                         color: treo-color('green', 800);
                         box-shadow: inset 0 0 0 1px treo-color('green', 400);
+
+                        .treo-message-icon {
+                            color: treo-color('green', 500);
+                        }
                     }
 
                     code {
@@ -558,6 +590,10 @@ treo-message {
                         background: treo-color('yellow', 50);
                         color: treo-color('yellow', 800);
                         box-shadow: inset 0 0 0 1px treo-color('yellow', 400);
+
+                        .treo-message-icon {
+                            color: treo-color('yellow', 500);
+                        }
                     }
 
                     code {
@@ -579,6 +615,310 @@ treo-message {
                         background: treo-color('red', 50);
                         color: treo-color('red', 800);
                         box-shadow: inset 0 0 0 1px treo-color('red', 400);
+
+                        .treo-message-icon {
+                            color: treo-color('red', 500);
+                        }
+                    }
+
+                    code {
+                        background: treo-color('red', 200);
+                        color: treo-color('red', 800);
+                    }
+                }
+            }
+        }
+
+        // Soft
+        &.treo-message-appearance-soft {
+
+            // Primary
+            &.treo-message-type-primary {
+
+                .treo-message-container {
+                    @if ($is-dark) {
+                        background: map-get($primary, 900);
+                    } @else {
+                        background: map-get($primary, 50);
+                    }
+
+                    .treo-message-icon {
+                        color: map-get($primary, 400);
+                    }
+
+                    .treo-message-title {
+                        @if ($is-dark) {
+                            color: map-get($primary, 400);
+                        } @else {
+                            color: map-get($primary, 800);
+                        }
+                    }
+
+                    .treo-message-message {
+                        @if ($is-dark) {
+                            color: map-get($primary, 300);
+                        } @else {
+                            color: map-get($primary, 700);
+                        }
+                    }
+
+                    code {
+                        background: map-get($primary, 200);
+                        color: map-get($primary, 800);
+                    }
+                }
+            }
+
+            // Accent
+            &.treo-message-type-accent {
+
+                .treo-message-container {
+                    @if ($is-dark) {
+                        background: map-get($accent, 900);
+                    } @else {
+                        background: map-get($accent, 100);
+                    }
+
+                    .treo-message-icon {
+                        color: map-get($accent, 400);
+                    }
+
+                    .treo-message-title {
+                        @if ($is-dark) {
+                            color: map-get($accent, 400);
+                        } @else {
+                            color: map-get($accent, 800);
+                        }
+                    }
+
+                    .treo-message-message {
+                        @if ($is-dark) {
+                            color: map-get($accent, 300);
+                        } @else {
+                            color: map-get($accent, 700);
+                        }
+                    }
+
+                    code {
+                        background: map-get($accent, 200);
+                        color: map-get($accent, 800);
+                    }
+                }
+            }
+
+            // Warn
+            &.treo-message-type-warn {
+
+                .treo-message-container {
+                    @if ($is-dark) {
+                        background: map-get($warn, 900);
+                    } @else {
+                        background: map-get($warn, 50);
+                    }
+
+                    .treo-message-icon {
+                        color: map-get($warn, 400);
+                    }
+
+                    .treo-message-title {
+                        @if ($is-dark) {
+                            color: map-get($warn, 400);
+                        } @else {
+                            color: map-get($warn, 800);
+                        }
+                    }
+
+                    .treo-message-message {
+                        @if ($is-dark) {
+                            color: map-get($warn, 300);
+                        } @else {
+                            color: map-get($warn, 700);
+                        }
+                    }
+
+                    code {
+                        background: map-get($warn, 200);
+                        color: map-get($warn, 800);
+                    }
+                }
+            }
+
+            // Basic
+            &.treo-message-type-basic {
+
+                .treo-message-container {
+                    @if ($is-dark) {
+                        background: treo-color('cool-gray', 900);
+                    } @else {
+                        background: treo-color('cool-gray', 100);
+                    }
+
+                    .treo-message-icon {
+                        color: treo-color('cool-gray', 400);
+                    }
+
+                    .treo-message-title {
+                        @if ($is-dark) {
+                            color: treo-color('cool-gray', 400);
+                        } @else {
+                            color: treo-color('cool-gray', 800);
+                        }
+                    }
+
+                    .treo-message-message {
+                        @if ($is-dark) {
+                            color: treo-color('cool-gray', 300);
+                        } @else {
+                            color: treo-color('cool-gray', 700);
+                        }
+                    }
+
+                    code {
+                        background: treo-color('cool-gray', 200);
+                        color: treo-color('cool-gray', 800);
+                    }
+                }
+            }
+
+            // Info
+            &.treo-message-type-info {
+
+                .treo-message-container {
+                    @if ($is-dark) {
+                        background: treo-color('blue', 900);
+                    } @else {
+                        background: treo-color('blue', 50);
+                    }
+
+                    .treo-message-icon {
+                        color: treo-color('blue', 400);
+                    }
+
+                    .treo-message-title {
+                        @if ($is-dark) {
+                            color: treo-color('blue', 400);
+                        } @else {
+                            color: treo-color('blue', 800);
+                        }
+                    }
+
+                    .treo-message-message {
+                        @if ($is-dark) {
+                            color: treo-color('blue', 300);
+                        } @else {
+                            color: treo-color('blue', 700);
+                        }
+                    }
+
+                    code {
+                        background: treo-color('blue', 200);
+                        color: treo-color('blue', 800);
+                    }
+                }
+            }
+
+            // Success
+            &.treo-message-type-success {
+
+                .treo-message-container {
+                    @if ($is-dark) {
+                        background: treo-color('green', 900);
+                    } @else {
+                        background: treo-color('green', 50);
+                    }
+
+                    .treo-message-icon {
+                        color: treo-color('green', 400);
+                    }
+
+                    .treo-message-title {
+                        @if ($is-dark) {
+                            color: treo-color('green', 400);
+                        } @else {
+                            color: treo-color('green', 800);
+                        }
+                    }
+
+                    .treo-message-message {
+                        @if ($is-dark) {
+                            color: treo-color('green', 300);
+                        } @else {
+                            color: treo-color('green', 700);
+                        }
+                    }
+
+                    code {
+                        background: treo-color('green', 200);
+                        color: treo-color('green', 800);
+                    }
+                }
+            }
+
+            // Warning
+            &.treo-message-type-warning {
+
+                .treo-message-container {
+                    @if ($is-dark) {
+                        background: treo-color('yellow', 500);
+                    } @else {
+                        background: treo-color('yellow', 50);
+                    }
+
+                    .treo-message-icon {
+                        color: treo-color('yellow', 300);
+                    }
+
+                    .treo-message-title {
+                        @if ($is-dark) {
+                            color: treo-color('yellow', 300);
+                        } @else {
+                            color: treo-color('yellow', 800);
+                        }
+                    }
+
+                    .treo-message-message {
+                        @if ($is-dark) {
+                            color: treo-color('yellow', 200);
+                        } @else {
+                            color: treo-color('yellow', 700);
+                        }
+                    }
+
+                    code {
+                        background: treo-color('yellow', 200);
+                        color: treo-color('yellow', 800);
+                    }
+                }
+            }
+
+            // Error
+            &.treo-message-type-error {
+
+                .treo-message-container {
+                    @if ($is-dark) {
+                        background: treo-color('red', 900);
+                    } @else {
+                        background: treo-color('red', 50);
+                    }
+
+                    .treo-message-icon {
+                        color: treo-color('red', 400);
+                    }
+
+                    .treo-message-title {
+                        @if ($is-dark) {
+                            color: treo-color('red', 400);
+                        } @else {
+                            color: treo-color('red', 800);
+                        }
+                    }
+
+                    .treo-message-message {
+                        @if ($is-dark) {
+                            color: treo-color('red', 300);
+                        } @else {
+                            color: treo-color('red', 700);
+                        }
                     }
 
                     code {

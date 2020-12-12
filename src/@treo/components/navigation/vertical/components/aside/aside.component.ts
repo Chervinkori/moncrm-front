@@ -146,7 +146,7 @@ export class TreoVerticalNavigationAsideItemComponent implements OnInit, OnDestr
      * @param url
      * @private
      */
-    private _hasCurrentUrlInChildren(item, url): boolean
+    private _hasCurrentUrlAsChildren(item, url): boolean
     {
         const children = item.children;
 
@@ -159,10 +159,16 @@ export class TreoVerticalNavigationAsideItemComponent implements OnInit, OnDestr
         {
             if ( child.children )
             {
-                if ( this._hasCurrentUrlInChildren(child, url) )
+                if ( this._hasCurrentUrlAsChildren(child, url) )
                 {
                     return true;
                 }
+            }
+
+            // Skip items other than 'basic'
+            if ( child.type !== 'basic' )
+            {
+                return false;
             }
 
             // Check if the item's link is the exact same of the
@@ -192,16 +198,18 @@ export class TreoVerticalNavigationAsideItemComponent implements OnInit, OnDestr
      */
     private _markIfActive(url): void
     {
-        // If the aside has a children that is active,
-        // always mark it as active
-        if ( this._hasCurrentUrlInChildren(this.item, url) )
-        {
-            this.active = true;
-            return;
-        }
-
         // Check if the activeItemId is equals to this item id
         this.active = this.activeItemId === this.item.id;
+
+        // If the aside has a children that is active,
+        // always mark it as active
+        if ( this._hasCurrentUrlAsChildren(this.item, url) )
+        {
+            this.active = true;
+        }
+
+        // Mark for check
+        this._changeDetectorRef.markForCheck();
     }
 
     // -----------------------------------------------------------------------------------------------------

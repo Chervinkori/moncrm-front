@@ -119,10 +119,10 @@ export class ContactsMockApi implements TreoMockApi
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Contact - PUT
+        // @ Contact - POST
         // -----------------------------------------------------------------------------------------------------
         this._treoMockApiService
-            .onPut('api/apps/contacts/contact')
+            .onPost('api/apps/contacts/contact')
             .reply(() => {
 
                 // Generate a new contact
@@ -236,10 +236,10 @@ export class ContactsMockApi implements TreoMockApi
             });
 
         // -----------------------------------------------------------------------------------------------------
-        // @ Tags - PUT
+        // @ Tags - POST
         // -----------------------------------------------------------------------------------------------------
         this._treoMockApiService
-            .onPut('api/apps/contacts/tag')
+            .onPost('api/apps/contacts/tag')
             .reply((request) => {
 
                 // Get the tag
