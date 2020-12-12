@@ -79,15 +79,6 @@ export class AuthSignUpComponent implements OnInit, OnDestroy
         // Do nothing if the form is invalid
         if ( this.signUpForm.invalid )
         {
-            this.signUpForm.markAllAsTouched();
-            // Show the message
-            this.message = {
-                appearance: 'outline',
-                content   : 'Error',
-                shake     : true,
-                showIcon  : false,
-                type      : 'error'
-            };
             return;
         }
 

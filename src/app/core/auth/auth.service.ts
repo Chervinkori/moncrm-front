@@ -7,6 +7,9 @@ import { AuthUtils } from 'app/core/auth/auth.utils';
 @Injectable()
 export class AuthService
 {
+    // Private
+    private _authenticated: boolean;
+
     /**
      * Constructor
      *
@@ -15,7 +18,10 @@ export class AuthService
     constructor(
         private _httpClient: HttpClient
     )
-    {}
+    {
+        // Set the defaults
+        this._authenticated = false;
+    }
 
     // -----------------------------------------------------------------------------------------------------
     // @ Accessors
@@ -34,15 +40,6 @@ export class AuthService
         return localStorage.getItem('access_token');
     }
 
-    isAuthenticated(): boolean {
-        // Check the access token availability
-        if (this.accessToken && !AuthUtils.isTokenExpired(this.accessToken)) {
-            return true;
-        }
-
-        return false;
-    }
-
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
@@ -55,7 +52,7 @@ export class AuthService
     signIn(credentials: { email: string, password: string }): Observable<any>
     {
         // Throw error, if the user is already logged in
-        if ( this.isAuthenticated() )
+        if ( this._authenticated )
         {
             return throwError('User is already logged in.');
         }
@@ -65,6 +62,9 @@ export class AuthService
 
                 // Store the access token in the local storage
                 this.accessToken = response.access_token;
+
+                // Set the authenticated flag to true
+                this._authenticated = true;
 
                 // Return a new observable with the response
                 return of(response);
@@ -91,6 +91,9 @@ export class AuthService
                 // Store the access token in the local storage
                 this.accessToken = response.access_token;
 
+                // Set the authenticated flag to true
+                this._authenticated = true;
+
                 // Return true
                 return of(true);
             })
@@ -105,6 +108,9 @@ export class AuthService
         // Remove the access token from the local storage
         localStorage.removeItem('access_token');
 
+        // Set the authenticated flag to false
+        this._authenticated = false;
+
         // Return the observable
         return of(true);
     }
@@ -115,16 +121,24 @@ export class AuthService
     check(): Observable<boolean>
     {
         // Check if the user is logged in
-        if ( !this.isAuthenticated() )
+        if ( this._authenticated )
+        {
+            return of(true);
+        }
+
+        // Check the access token availability
+        if ( !this.accessToken )
         {
             return of(false);
         }
 
-        if (60 >= "кол-во минут до просрочки") {
-            return this.signInUsingToken();
+        // Check the access token expire date
+        if ( AuthUtils.isTokenExpired(this.accessToken) )
+        {
+            return of(false);
         }
 
         // If the access token exists and it didn't expire, sign in using it
-        return of(true);
+        return this.signInUsingToken();
     }
 }
