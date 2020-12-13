@@ -165,27 +165,11 @@ export class AuthMockApi implements TreoMockApi
         this._treoMockApiService
             .onPost('api/auth/refresh-access-token')
             .reply((request) => {
-
-                // Get the access token
-                const accessToken = request.body.access_token;
-
-                // Verify the token
-                if ( this._verifyJWTToken(accessToken) )
-                {
-                    return [
-                        200,
-                        {
-                            access_token: this._generateJWTToken(),
-                            token_type  : 'bearer'
-                        }
-                    ];
-                }
-
-                // Invalid token
                 return [
-                    401,
+                    200,
                     {
-                        error: 'Invalid token'
+                        access_token: this._generateJWTToken(),
+                        token_type  : 'bearer'
                     }
                 ];
             });

@@ -1,0 +1,11 @@
+{
+  "/backend/*": {
+    "target": "http://local.moncrm.ru",
+    "secure": false,
+    "changeOrigin": true,
+    "toProxy": true,
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

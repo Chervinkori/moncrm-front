@@ -1,18 +1,17 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { TreoAnimations } from '@treo/animations';
-import { AuthService } from 'app/core/auth/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {TreoAnimations} from '@treo/animations';
+import {AuthService} from 'app/core/auth/auth.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
-    selector     : 'auth-sign-in',
-    templateUrl  : './sign-in.component.html',
-    styleUrls    : ['./sign-in.component.scss'],
+    selector: 'auth-sign-in',
+    templateUrl: './sign-in.component.html',
+    styleUrls: ['./sign-in.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations   : TreoAnimations
+    animations: TreoAnimations
 })
-export class AuthSignInComponent implements OnInit
-{
+export class AuthSignInComponent implements OnInit {
     signInForm: FormGroup;
     message: any;
 
@@ -29,8 +28,7 @@ export class AuthSignInComponent implements OnInit
         private _authService: AuthService,
         private _formBuilder: FormBuilder,
         private _router: Router
-    )
-    {
+    ) {
         // Set the defaults
         this.message = null;
     }
@@ -42,12 +40,11 @@ export class AuthSignInComponent implements OnInit
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         // Create the form
         this.signInForm = this._formBuilder.group({
-            email     : ['watkins.andrew@company.com'],
-            password  : ['admin'],
+            email: ['watkins.andrew@company.com'],
+            password: ['admin'],
             rememberMe: ['']
         });
     }
@@ -59,8 +56,7 @@ export class AuthSignInComponent implements OnInit
     /**
      * Sign in
      */
-    signIn(): void
-    {
+    signIn(): void {
         // Disable the form
         this.signInForm.disable();
 
@@ -91,10 +87,10 @@ export class AuthSignInComponent implements OnInit
                 // Show the error message
                 this.message = {
                     appearance: 'outline',
-                    content   : response.error,
-                    shake     : true,
-                    showIcon  : false,
-                    type      : 'error'
+                    content: response.error.message,
+                    shake: true,
+                    showIcon: false,
+                    type: 'error'
                 };
             });
     }

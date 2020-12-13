@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 import { AuthService } from 'app/core/auth/auth.service';
 import { AuthInterceptor } from 'app/core/auth/auth.interceptor';
+import {RefreshAccessTokenInterceptor} from './auth/refresh-access-token.interceptor';
 
 @NgModule({
     imports  : [
@@ -14,6 +15,11 @@ import { AuthInterceptor } from 'app/core/auth/auth.interceptor';
         {
             provide : HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
+            multi   : true
+        },
+        {
+            provide : HTTP_INTERCEPTORS,
+            useClass: RefreshAccessTokenInterceptor,
             multi   : true
         }
     ]

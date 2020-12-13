@@ -5,6 +5,7 @@
     "scripts": {
         "ng": "ng",
         "start": "ng serve --open",
+        "start:backend": "ng serve --open --host=local.moncrm.ru  --proxy-config src/proxy.json",
         "start:mem": "node --max_old_space_size=6144 ./node_modules/@angular/cli/bin/ng serve --open",
         "build": "ng build",
         "build:prod": "ng build --prod",
