@@ -1,15 +1,20 @@
-import { Injectable } from '@angular/core';
-import { assign, cloneDeep } from 'lodash-es';
-import { TreoMockApi } from '@treo/lib/mock-api/mock-api.interfaces';
-import { TreoMockApiUtils } from '@treo/lib/mock-api/mock-api.utils';
-import { TreoMockApiService } from '@treo/lib/mock-api/mock-api.service';
-import { filters as filtersData, folders as foldersData, labels as labelsData, mails as mailsData, settings as settingsData } from 'app/data/mock/apps/mailbox/data';
+import {Injectable} from '@angular/core';
+import {assign, cloneDeep} from 'lodash-es';
+import {TreoMockApi} from '@treo/lib/mock-api/mock-api.interfaces';
+import {TreoMockApiUtils} from '@treo/lib/mock-api/mock-api.utils';
+import {TreoMockApiService} from '@treo/lib/mock-api/mock-api.service';
+import {
+    filters as filtersData,
+    folders as foldersData,
+    labels as labelsData,
+    mails as mailsData,
+    settings as settingsData
+} from 'app/data/mock/apps/mailbox/data';
 
 @Injectable({
     providedIn: 'root'
 })
-export class MailboxMockApi implements TreoMockApi
-{
+export class MailboxMockApi implements TreoMockApi {
     // Private
     private _filters: any[];
     private _folders: any[];
@@ -24,8 +29,7 @@ export class MailboxMockApi implements TreoMockApi
      */
     constructor(
         private _treoMockApiService: TreoMockApiService
-    )
-    {
+    ) {
         // Set the data
         this._filters = filtersData;
         this._folders = foldersData;
@@ -44,8 +48,7 @@ export class MailboxMockApi implements TreoMockApi
     /**
      * Register
      */
-    register(): void
-    {
+    register(): void {
         // -----------------------------------------------------------------------------------------------------
         // @ Settings - GET
         // -----------------------------------------------------------------------------------------------------
@@ -94,25 +97,21 @@ export class MailboxMockApi implements TreoMockApi
                     const mails = this._mails.filter((mail) => mail.folder === folder.id);
 
                     // If we are counting the 'sent' or the 'trash' folder...
-                    if ( folder.slug === 'sent' || folder.slug === 'trash' )
-                    {
+                    if (folder.slug === 'sent' || folder.slug === 'trash') {
                         // Always set the count to 0
                         count = 0;
                     }
                     // If we are counting the 'drafts' or the 'spam' folder...
-                    else if ( folder.slug === 'drafts' || folder.slug === 'trash' || folder.slug === 'spam' )
-                    {
+                    else if (folder.slug === 'drafts' || folder.slug === 'trash' || folder.slug === 'spam') {
                         // Set the count to the count of all mails
                         count = mails.length;
                     }
                     // Otherwise ('inbox')...
-                    else
-                    {
+                    else {
                         // Go through the mails and count the unread ones
                         mails.forEach((mail) => {
 
-                            if ( mail.unread )
-                            {
+                            if (mail.unread) {
                                 count++;
                             }
                         });
@@ -172,9 +171,9 @@ export class MailboxMockApi implements TreoMockApi
 
                 // Generate a slug
                 label.slug = label.title.toLowerCase()
-                                  .replace(/ /g, '-')
-                                  .replace(/[-]+/g, '-')
-                                  .replace(/[^\w-]+/g, '');
+                    .replace(/ /g, '-')
+                    .replace(/[-]+/g, '-')
+                    .replace(/[^\w-]+/g, '');
 
                 // Check if the slug is being used and update it if necessary
                 const originalSlug = label.slug;
@@ -182,19 +181,17 @@ export class MailboxMockApi implements TreoMockApi
                 let sameSlug;
                 let slugSuffix = 1;
 
-                do
-                {
+                do {
                     sameSlug = this._labels.filter((item) => {
                         return item.slug === label.slug;
                     });
 
-                    if ( sameSlug.length > 0 )
-                    {
+                    if (sameSlug.length > 0) {
                         label.slug = originalSlug + '-' + slugSuffix;
                         slugSuffix++;
                     }
                 }
-                while ( sameSlug.length > 0 );
+                while (sameSlug.length > 0);
 
                 // Add the label
                 this._labels.push(label);
@@ -222,13 +219,12 @@ export class MailboxMockApi implements TreoMockApi
                 // Find the label and update it
                 this._labels.forEach((item, index, labels) => {
 
-                    if ( item.id === id )
-                    {
+                    if (item.id === id) {
                         // Update the slug
                         label.slug = label.title.toLowerCase()
-                                          .replace(/ /g, '-')
-                                          .replace(/[-]+/g, '-')
-                                          .replace(/[^\w-]+/g, '');
+                            .replace(/ /g, '-')
+                            .replace(/[-]+/g, '-')
+                            .replace(/[^\w-]+/g, '');
 
                         // Update the label
                         labels[index] = assign({}, labels[index], label);
@@ -292,18 +288,15 @@ export class MailboxMockApi implements TreoMockApi
                 // Filter the mails depending on the requested by type
                 mails = mails.filter((mail) => {
 
-                    if ( byFolder )
-                    {
+                    if (byFolder) {
                         return mail.folder === this._folders.find(folder => folder.slug === byFolder).id;
                     }
 
-                    if ( byFilter )
-                    {
+                    if (byFilter) {
                         return mail[byFilter] === true;
                     }
 
-                    if ( byLabel )
-                    {
+                    if (byLabel) {
                         return mail.labels.includes(this._labels.find(label => label.slug === byLabel).id);
                     }
                 });
@@ -338,26 +331,23 @@ export class MailboxMockApi implements TreoMockApi
                 // the last possible page number, return null for
                 // mails but also send the last possible page so
                 // the app can navigate to there
-                if ( page > lastPage )
-                {
+                if (page > lastPage) {
                     mails = null;
                     pagination = {
                         lastPage
                     };
-                }
-                else
-                {
+                } else {
                     // Paginate the results by 10
                     mails = mails.slice(begin, end);
 
                     // Prepare the pagination data
                     pagination = {
-                        totalResults  : mailsLength,
+                        totalResults: mailsLength,
                         resultsPerPage: resultsPerPage,
-                        currentPage   : page,
-                        lastPage      : lastPage,
-                        startIndex    : begin,
-                        endIndex      : end - 1
+                        currentPage: page,
+                        lastPage: lastPage,
+                        startIndex: begin,
+                        endIndex: end - 1
                     };
                 }
                 // Paginate - End
@@ -410,8 +400,7 @@ export class MailboxMockApi implements TreoMockApi
                 // Find the mail and update it
                 this._mails.forEach((item, index, mails) => {
 
-                    if ( item.id === id )
-                    {
+                    if (item.id === id) {
                         // Update the mail
                         mails[index] = assign({}, mails[index], mail);
 

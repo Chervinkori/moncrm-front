@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { forkJoin, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
+import {forkJoin, Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
-export class InitialDataResolver implements Resolve<any>
-{
+export class InitialDataResolver implements Resolve<any> {
     /**
      * Constructor
      *
@@ -16,8 +15,7 @@ export class InitialDataResolver implements Resolve<any>
      */
     constructor(
         private _httpClient: HttpClient
-    )
-    {
+    ) {
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -29,8 +27,7 @@ export class InitialDataResolver implements Resolve<any>
      *
      * @private
      */
-    private _loadMessages(): Observable<any>
-    {
+    private _loadMessages(): Observable<any> {
         return this._httpClient.get('api/common/messages');
     }
 
@@ -39,8 +36,7 @@ export class InitialDataResolver implements Resolve<any>
      *
      * @private
      */
-    private _loadNavigation(): Observable<any>
-    {
+    private _loadNavigation(): Observable<any> {
         return this._httpClient.get('api/common/navigation');
     }
 
@@ -49,8 +45,7 @@ export class InitialDataResolver implements Resolve<any>
      *
      * @private
      */
-    private _loadNotifications(): Observable<any>
-    {
+    private _loadNotifications(): Observable<any> {
         return this._httpClient.get('api/common/notifications');
     }
 
@@ -59,8 +54,7 @@ export class InitialDataResolver implements Resolve<any>
      *
      * @private
      */
-    private _loadShortcuts(): Observable<any>
-    {
+    private _loadShortcuts(): Observable<any> {
         return this._httpClient.get('api/common/shortcuts');
     }
 
@@ -69,8 +63,7 @@ export class InitialDataResolver implements Resolve<any>
      *
      * @private
      */
-    private _loadUser(): Observable<any>
-    {
+    private _loadUser(): Observable<any> {
         return this._httpClient.get('api/common/user');
     }
 
@@ -84,8 +77,7 @@ export class InitialDataResolver implements Resolve<any>
      * @param route
      * @param state
      */
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>
-    {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
         return forkJoin([
 
             // Messages
@@ -106,16 +98,16 @@ export class InitialDataResolver implements Resolve<any>
             map((data) => {
 
                 return {
-                    messages     : data[0].messages,
-                    navigation   : {
-                        compact   : data[1].compact,
-                        default   : data[1].default,
+                    messages: data[0].messages,
+                    navigation: {
+                        compact: data[1].compact,
+                        default: data[1].default,
                         futuristic: data[1].futuristic,
                         horizontal: data[1].horizontal
                     },
                     notifications: data[2].notifications,
-                    shortcuts    : data[3].shortcuts,
-                    user         : data[4].user
+                    shortcuts: data[3].shortcuts,
+                    user: data[4].user
                 };
             })
         );

@@ -1,15 +1,20 @@
-import { Injectable } from '@angular/core';
-import { assign, cloneDeep } from 'lodash-es';
-import { TreoMockApi } from '@treo/lib/mock-api/mock-api.interfaces';
-import { TreoMockApiUtils } from '@treo/lib/mock-api/mock-api.utils';
-import { TreoMockApiService } from '@treo/lib/mock-api/mock-api.service';
-import { brands as brandsData, categories as categoriesData, products as productsData, tags as tagsData, vendors as vendorsData } from 'app/data/mock/apps/ecommerce/inventory/data';
+import {Injectable} from '@angular/core';
+import {assign, cloneDeep} from 'lodash-es';
+import {TreoMockApi} from '@treo/lib/mock-api/mock-api.interfaces';
+import {TreoMockApiUtils} from '@treo/lib/mock-api/mock-api.utils';
+import {TreoMockApiService} from '@treo/lib/mock-api/mock-api.service';
+import {
+    brands as brandsData,
+    categories as categoriesData,
+    products as productsData,
+    tags as tagsData,
+    vendors as vendorsData
+} from 'app/data/mock/apps/ecommerce/inventory/data';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ECommerceInventoryMockApi implements TreoMockApi
-{
+export class ECommerceInventoryMockApi implements TreoMockApi {
     // Private
     private _categories: any[];
     private _brands: any[];
@@ -24,8 +29,7 @@ export class ECommerceInventoryMockApi implements TreoMockApi
      */
     constructor(
         private _treoMockApiService: TreoMockApiService
-    )
-    {
+    ) {
         // Set the data
         this._categories = categoriesData;
         this._brands = brandsData;
@@ -44,8 +48,7 @@ export class ECommerceInventoryMockApi implements TreoMockApi
     /**
      * Register
      */
-    register(): void
-    {
+    register(): void {
         // -----------------------------------------------------------------------------------------------------
         // @ Categories - GET
         // -----------------------------------------------------------------------------------------------------
@@ -90,22 +93,18 @@ export class ECommerceInventoryMockApi implements TreoMockApi
                 let products = cloneDeep(this._products);
 
                 // Sort the products
-                if ( sort === 'sku' || sort === 'name' || sort === 'active' )
-                {
+                if (sort === 'sku' || sort === 'name' || sort === 'active') {
                     products.sort((a, b) => {
                         const fieldA = a[sort].toString().toUpperCase();
                         const fieldB = b[sort].toString().toUpperCase();
                         return order === 'asc' ? fieldA.localeCompare(fieldB) : fieldB.localeCompare(fieldA);
                     });
-                }
-                else
-                {
+                } else {
                     products.sort((a, b) => order === 'asc' ? a[sort] - b[sort] : b[sort] - a[sort]);
                 }
 
                 // If search exists...
-                if ( search )
-                {
+                if (search) {
                     // Filter the products
                     products = products.filter((contact) => {
                         return contact.name && contact.name.toLowerCase().includes(search.toLowerCase());
@@ -127,26 +126,23 @@ export class ECommerceInventoryMockApi implements TreoMockApi
                 // the last possible page number, return null for
                 // products but also send the last possible page so
                 // the app can navigate to there
-                if ( page > lastPage )
-                {
+                if (page > lastPage) {
                     products = null;
                     pagination = {
                         lastPage
                     };
-                }
-                else
-                {
+                } else {
                     // Paginate the results by size
                     products = products.slice(begin, end);
 
                     // Prepare the pagination data
                     pagination = {
-                        length    : productsLength,
-                        size      : size,
-                        page      : page,
-                        lastPage  : lastPage,
+                        length: productsLength,
+                        size: size,
+                        page: page,
+                        lastPage: lastPage,
                         startIndex: begin,
-                        endIndex  : end - 1
+                        endIndex: end - 1
                     };
                 }
                 // Paginate - End
@@ -193,25 +189,25 @@ export class ECommerceInventoryMockApi implements TreoMockApi
 
                 // Generate a new product
                 const newProduct = {
-                    id         : TreoMockApiUtils.guid(),
-                    category   : '',
-                    name       : 'A New Product',
+                    id: TreoMockApiUtils.guid(),
+                    category: '',
+                    name: 'A New Product',
                     description: '',
-                    tags       : [],
-                    sku        : '',
-                    barcode    : '',
-                    brand      : '',
-                    vendor     : '',
-                    stock      : '',
-                    reserved   : '',
-                    cost       : '',
-                    basePrice  : '',
-                    taxPercent : '',
-                    price      : '',
-                    weight     : '',
-                    thumbnail  : '',
-                    images     : [],
-                    active     : false
+                    tags: [],
+                    sku: '',
+                    barcode: '',
+                    brand: '',
+                    vendor: '',
+                    stock: '',
+                    reserved: '',
+                    cost: '',
+                    basePrice: '',
+                    taxPercent: '',
+                    price: '',
+                    weight: '',
+                    thumbnail: '',
+                    images: [],
+                    active: false
                 };
 
                 // Unshift the new product
@@ -240,8 +236,7 @@ export class ECommerceInventoryMockApi implements TreoMockApi
                 // Find the product and update it
                 this._products.forEach((item, index, products) => {
 
-                    if ( item.id === id )
-                    {
+                    if (item.id === id) {
                         // Update the product
                         products[index] = assign({}, products[index], product);
 
@@ -269,8 +264,7 @@ export class ECommerceInventoryMockApi implements TreoMockApi
                 // Find the product and delete it
                 this._products.forEach((item, index) => {
 
-                    if ( item.id === id )
-                    {
+                    if (item.id === id) {
                         this._products.splice(index, 1);
                     }
                 });
@@ -333,8 +327,7 @@ export class ECommerceInventoryMockApi implements TreoMockApi
                 // Find the tag and update it
                 this._tags.forEach((item, index, tags) => {
 
-                    if ( item.id === id )
-                    {
+                    if (item.id === id) {
                         // Update the tag
                         tags[index] = assign({}, tags[index], tag);
 
@@ -362,8 +355,7 @@ export class ECommerceInventoryMockApi implements TreoMockApi
                 // Find the tag and delete it
                 this._tags.forEach((item, index) => {
 
-                    if ( item.id === id )
-                    {
+                    if (item.id === id) {
                         this._tags.splice(index, 1);
                     }
                 });

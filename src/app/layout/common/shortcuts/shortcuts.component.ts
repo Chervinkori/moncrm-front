@@ -1,23 +1,33 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { TemplatePortal } from '@angular/cdk/portal';
-import { MatButton } from '@angular/material/button';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { Shortcut } from 'app/layout/common/shortcuts/shortcuts.types';
-import { ShortcutsService } from 'app/layout/common/shortcuts/shortcuts.service';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    Input,
+    OnDestroy,
+    OnInit,
+    TemplateRef,
+    ViewChild,
+    ViewContainerRef,
+    ViewEncapsulation
+} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Overlay, OverlayRef} from '@angular/cdk/overlay';
+import {TemplatePortal} from '@angular/cdk/portal';
+import {MatButton} from '@angular/material/button';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {Shortcut} from 'app/layout/common/shortcuts/shortcuts.types';
+import {ShortcutsService} from 'app/layout/common/shortcuts/shortcuts.service';
 
 @Component({
-    selector       : 'shortcuts',
-    templateUrl    : './shortcuts.component.html',
-    styleUrls      : ['./shortcuts.component.scss'],
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'shortcuts',
+    templateUrl: './shortcuts.component.html',
+    styleUrls: ['./shortcuts.component.scss'],
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    exportAs       : 'shortcuts'
+    exportAs: 'shortcuts'
 })
-export class ShortcutsComponent implements OnInit, OnDestroy
-{
+export class ShortcutsComponent implements OnInit, OnDestroy {
     mode: 'view' | 'modify' | 'add' | 'edit';
     shortcutForm: FormGroup;
 
@@ -47,8 +57,7 @@ export class ShortcutsComponent implements OnInit, OnDestroy
         private _shortcutsService: ShortcutsService,
         private _overlay: Overlay,
         private _viewContainerRef: ViewContainerRef
-    )
-    {
+    ) {
         // Set the private defaults
         this._unsubscribeAll = new Subject();
 
@@ -64,14 +73,12 @@ export class ShortcutsComponent implements OnInit, OnDestroy
      * Setter & getter for shortcuts
      */
     @Input()
-    set shortcuts(value: Shortcut[])
-    {
+    set shortcuts(value: Shortcut[]) {
         // Store the value
         this._shortcutsService.store(value);
     }
 
-    get shortcuts(): Shortcut[]
-    {
+    get shortcuts(): Shortcut[] {
         return this._shortcuts;
     }
 
@@ -82,16 +89,15 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         // Initialize the form
         this.shortcutForm = this._formBuilder.group({
-            id         : [null],
-            label      : ['', Validators.required],
+            id: [null],
+            label: ['', Validators.required],
             description: [''],
-            icon       : ['', Validators.required],
-            link       : ['', Validators.required],
-            useRouter  : ['', Validators.required]
+            icon: ['', Validators.required],
+            link: ['', Validators.required],
+            useRouter: ['', Validators.required]
         });
 
         // Get the shortcuts
@@ -110,15 +116,13 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
 
         // Dispose the overlay if it's still on the DOM
-        if ( this._overlayRef )
-        {
+        if (this._overlayRef) {
             this._overlayRef.dispose();
         }
     }
@@ -130,8 +134,7 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     /**
      * Create route from given link
      */
-    createRouteFromLink(link): string[]
-    {
+    createRouteFromLink(link): string[] {
         // Split the link and add a leading slash
         const route = link.split('/');
         route.unshift('/');
@@ -143,44 +146,43 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     /**
      * Open the shortcuts panel
      */
-    openPanel(): void
-    {
+    openPanel(): void {
         // Create the overlay
         this._overlayRef = this._overlay.create({
-            backdropClass   : '',
-            hasBackdrop     : true,
-            scrollStrategy  : this._overlay.scrollStrategies.block(),
+            backdropClass: '',
+            hasBackdrop: true,
+            scrollStrategy: this._overlay.scrollStrategies.block(),
             positionStrategy: this._overlay.position()
-                                  .flexibleConnectedTo(this._shortcutsOrigin._elementRef.nativeElement)
-                                  .withFlexibleDimensions()
-                                  .withViewportMargin(16)
-                                  .withLockedPosition()
-                                  .withPositions([
-                                      {
-                                          originX : 'start',
-                                          originY : 'bottom',
-                                          overlayX: 'start',
-                                          overlayY: 'top'
-                                      },
-                                      {
-                                          originX : 'start',
-                                          originY : 'top',
-                                          overlayX: 'start',
-                                          overlayY: 'bottom'
-                                      },
-                                      {
-                                          originX : 'end',
-                                          originY : 'bottom',
-                                          overlayX: 'end',
-                                          overlayY: 'top'
-                                      },
-                                      {
-                                          originX : 'end',
-                                          originY : 'top',
-                                          overlayX: 'end',
-                                          overlayY: 'bottom'
-                                      }
-                                  ])
+                .flexibleConnectedTo(this._shortcutsOrigin._elementRef.nativeElement)
+                .withFlexibleDimensions()
+                .withViewportMargin(16)
+                .withLockedPosition()
+                .withPositions([
+                    {
+                        originX: 'start',
+                        originY: 'bottom',
+                        overlayX: 'start',
+                        overlayY: 'top'
+                    },
+                    {
+                        originX: 'start',
+                        originY: 'top',
+                        overlayX: 'start',
+                        overlayY: 'bottom'
+                    },
+                    {
+                        originX: 'end',
+                        originY: 'bottom',
+                        overlayX: 'end',
+                        overlayY: 'top'
+                    },
+                    {
+                        originX: 'end',
+                        originY: 'top',
+                        overlayX: 'end',
+                        overlayY: 'bottom'
+                    }
+                ])
         });
 
         // Create a portal from the template
@@ -193,15 +195,13 @@ export class ShortcutsComponent implements OnInit, OnDestroy
         this._overlayRef.backdropClick().subscribe(() => {
 
             // If overlay exists and attached...
-            if ( this._overlayRef && this._overlayRef.hasAttached() )
-            {
+            if (this._overlayRef && this._overlayRef.hasAttached()) {
                 // Detach it
                 this._overlayRef.detach();
             }
 
             // If template portal exists and attached...
-            if ( templatePortal && templatePortal.isAttached )
-            {
+            if (templatePortal && templatePortal.isAttached) {
                 // Detach it
                 templatePortal.detach();
             }
@@ -214,8 +214,7 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     /**
      * Change the mode
      */
-    changeMode(mode): void
-    {
+    changeMode(mode): void {
         // Change the mode
         this.mode = mode;
     }
@@ -223,8 +222,7 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     /**
      * Prepare for a new shortcut
      */
-    newShortcut(): void
-    {
+    newShortcut(): void {
         // Reset the form
         this.shortcutForm.reset();
 
@@ -235,8 +233,7 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     /**
      * Edit a shortcut
      */
-    editShortcut(shortcut): void
-    {
+    editShortcut(shortcut): void {
         // Reset the form with the shortcut
         this.shortcutForm.reset(shortcut);
 
@@ -247,19 +244,16 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     /**
      * Save shortcut
      */
-    save(): void
-    {
+    save(): void {
         // Get the data from the form
         const shortcut = this.shortcutForm.value;
 
         // If there is an id, update it...
-        if ( shortcut.id )
-        {
+        if (shortcut.id) {
             this._shortcutsService.update(shortcut.id, shortcut).subscribe();
         }
         // Otherwise, create a new shortcut...
-        else
-        {
+        else {
             this._shortcutsService.create(shortcut).subscribe();
         }
 
@@ -270,8 +264,7 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     /**
      * Delete shortcut
      */
-    delete(): void
-    {
+    delete(): void {
         // Get the data from the form
         const shortcut = this.shortcutForm.value;
 

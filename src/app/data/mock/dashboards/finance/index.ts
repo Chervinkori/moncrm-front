@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
-import { cloneDeep } from 'lodash-es';
-import { TreoMockApi } from '@treo/lib/mock-api/mock-api.interfaces';
-import { TreoMockApiService } from '@treo/lib/mock-api/mock-api.service';
-import { finance as financeData } from 'app/data/mock/dashboards/finance/data';
+import {Injectable} from '@angular/core';
+import {cloneDeep} from 'lodash-es';
+import {TreoMockApi} from '@treo/lib/mock-api/mock-api.interfaces';
+import {TreoMockApiService} from '@treo/lib/mock-api/mock-api.service';
+import {finance as financeData} from 'app/data/mock/dashboards/finance/data';
 
 @Injectable({
     providedIn: 'root'
 })
-export class FinanceMockApi implements TreoMockApi
-{
+export class FinanceMockApi implements TreoMockApi {
     // Private
     private _finance: any;
 
@@ -19,8 +18,7 @@ export class FinanceMockApi implements TreoMockApi
      */
     constructor(
         private _treoMockApiService: TreoMockApiService
-    )
-    {
+    ) {
         // Set the data
         this._finance = financeData;
 
@@ -35,8 +33,7 @@ export class FinanceMockApi implements TreoMockApi
     /**
      * Register
      */
-    register(): void
-    {
+    register(): void {
         // -----------------------------------------------------------------------------------------------------
         // @ Sales - GET
         // -----------------------------------------------------------------------------------------------------

@@ -1,15 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
-import { Shortcut } from 'app/layout/common/shortcuts/shortcuts.types';
-import { Notification } from 'app/layout/common/notifications/notifications.types';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {map, switchMap, take} from 'rxjs/operators';
+import {Shortcut} from 'app/layout/common/shortcuts/shortcuts.types';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ShortcutsService
-{
+export class ShortcutsService {
     // Private
     private _shortcuts: BehaviorSubject<Shortcut[] | null>;
 
@@ -20,8 +18,7 @@ export class ShortcutsService
      */
     constructor(
         private _httpClient: HttpClient
-    )
-    {
+    ) {
         // Set the private defaults
         this._shortcuts = new BehaviorSubject(null);
     }
@@ -33,8 +30,7 @@ export class ShortcutsService
     /**
      * Getter for shortcuts
      */
-    get shortcuts$(): Observable<Shortcut[]>
-    {
+    get shortcuts$(): Observable<Shortcut[]> {
         return this._shortcuts.asObservable();
     }
 
@@ -47,8 +43,7 @@ export class ShortcutsService
      *
      * @param shortcuts
      */
-    store(shortcuts: Shortcut[]): Observable<Shortcut[]>
-    {
+    store(shortcuts: Shortcut[]): Observable<Shortcut[]> {
         // Load the shortcuts
         this._shortcuts.next(shortcuts);
 
@@ -61,8 +56,7 @@ export class ShortcutsService
      *
      * @param shortcut
      */
-    create(shortcut: Shortcut): Observable<Shortcut>
-    {
+    create(shortcut: Shortcut): Observable<Shortcut> {
         return this.shortcuts$.pipe(
             take(1),
             switchMap(shortcuts => this._httpClient.post<Shortcut>('api/common/shortcuts', {shortcut}).pipe(
@@ -84,8 +78,7 @@ export class ShortcutsService
      * @param id
      * @param shortcut
      */
-    update(id: string, shortcut: Shortcut): Observable<Shortcut>
-    {
+    update(id: string, shortcut: Shortcut): Observable<Shortcut> {
         return this.shortcuts$.pipe(
             take(1),
             switchMap(shortcuts => this._httpClient.patch<Shortcut>('api/common/shortcuts', {
@@ -115,8 +108,7 @@ export class ShortcutsService
      *
      * @param id
      */
-    delete(id: string): Observable<boolean>
-    {
+    delete(id: string): Observable<boolean> {
         return this.shortcuts$.pipe(
             take(1),
             switchMap(shortcuts => this._httpClient.delete<boolean>('api/common/shortcuts', {params: {id}}).pipe(

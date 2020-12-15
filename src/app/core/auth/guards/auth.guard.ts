@@ -18,12 +18,6 @@ import {switchMap} from 'rxjs/operators';
     providedIn: 'root'
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
-    /**
-     * Constructor
-     *
-     * @param {AuthService} _authService
-     * @param {Router} _router
-     */
     constructor(
         private _authService: AuthService,
         private _router: Router
@@ -35,27 +29,25 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     // -----------------------------------------------------------------------------------------------------
 
     /**
-     * Check the authenticated status
+     * Проверяет статус авторизации пользователя в системе.
+     * Если пользователь не авторизован отправляет запрос на обновление токена доступа.
      *
      * @param redirectURL
      * @private
      */
     private _check(redirectURL): Observable<boolean> {
-        // Check the authentication status
         return this._authService.isAuth()
             .pipe(
                 switchMap((authenticated) => {
-
-                    // If the user is not authenticated...
                     if (!authenticated) {
-                        // Redirect to the sign-in page
+                        // Выходит из системы
+                        this._authService.signOut();
+                        // Перенаправление на страницу авторизации
                         this._router.navigate(['sign-in'], {queryParams: {redirectURL}});
 
-                        // Prevent the access
                         return of(false);
                     }
 
-                    // Allow the access
                     return of(true);
                 })
             );

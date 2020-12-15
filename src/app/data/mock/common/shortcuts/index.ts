@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
-import { assign, cloneDeep } from 'lodash-es';
-import { TreoMockApi } from '@treo/lib/mock-api/mock-api.interfaces';
-import { TreoMockApiService } from '@treo/lib/mock-api/mock-api.service';
-import { TreoMockApiUtils } from '@treo/lib/mock-api/mock-api.utils';
-import { shortcuts as shortcutsData } from 'app/data/mock/common/shortcuts/data';
+import {Injectable} from '@angular/core';
+import {assign, cloneDeep} from 'lodash-es';
+import {TreoMockApi} from '@treo/lib/mock-api/mock-api.interfaces';
+import {TreoMockApiService} from '@treo/lib/mock-api/mock-api.service';
+import {TreoMockApiUtils} from '@treo/lib/mock-api/mock-api.utils';
+import {shortcuts as shortcutsData} from 'app/data/mock/common/shortcuts/data';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ShortcutsMockApi implements TreoMockApi
-{
+export class ShortcutsMockApi implements TreoMockApi {
     // Private
     private _shortcuts: any;
 
@@ -20,8 +19,7 @@ export class ShortcutsMockApi implements TreoMockApi
      */
     constructor(
         private _treoMockApiService: TreoMockApiService
-    )
-    {
+    ) {
         // Set the data
         this._shortcuts = shortcutsData;
 
@@ -36,8 +34,7 @@ export class ShortcutsMockApi implements TreoMockApi
     /**
      * Register
      */
-    register(): void
-    {
+    register(): void {
         // -----------------------------------------------------------------------------------------------------
         // @ Shortcuts - GET
         // -----------------------------------------------------------------------------------------------------
@@ -91,8 +88,7 @@ export class ShortcutsMockApi implements TreoMockApi
                 // Find the shortcut and update it
                 this._shortcuts.forEach((item, index, shortcuts) => {
 
-                    if ( item.id === id )
-                    {
+                    if (item.id === id) {
                         // Update the shortcut
                         shortcuts[index] = assign({}, shortcuts[index], shortcut);
 

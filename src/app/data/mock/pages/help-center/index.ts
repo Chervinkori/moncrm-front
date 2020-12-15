@@ -1,14 +1,19 @@
-import { Injectable } from '@angular/core';
-import { cloneDeep } from 'lodash-es';
-import { TreoMockApi } from '@treo/lib/mock-api/mock-api.interfaces';
-import { TreoMockApiService } from '@treo/lib/mock-api/mock-api.service';
-import { faqCategories as faqCategoriesData, faqs as faqsData, guideCategories as guideCategoriesData, guideContent as guideContentData, guides as guidesData } from 'app/data/mock/pages/help-center/data';
+import {Injectable} from '@angular/core';
+import {cloneDeep} from 'lodash-es';
+import {TreoMockApi} from '@treo/lib/mock-api/mock-api.interfaces';
+import {TreoMockApiService} from '@treo/lib/mock-api/mock-api.service';
+import {
+    faqCategories as faqCategoriesData,
+    faqs as faqsData,
+    guideCategories as guideCategoriesData,
+    guideContent as guideContentData,
+    guides as guidesData
+} from 'app/data/mock/pages/help-center/data';
 
 @Injectable({
     providedIn: 'root'
 })
-export class HelpCenterMockApi implements TreoMockApi
-{
+export class HelpCenterMockApi implements TreoMockApi {
     // Private
     private _faqCategories: any[];
     private _faqs: any[];
@@ -23,8 +28,7 @@ export class HelpCenterMockApi implements TreoMockApi
      */
     constructor(
         private _treoMockApiService: TreoMockApiService
-    )
-    {
+    ) {
         // Set the data
         this._faqCategories = faqCategoriesData;
         this._faqs = faqsData;
@@ -43,8 +47,7 @@ export class HelpCenterMockApi implements TreoMockApi
     /**
      * Register
      */
-    register(): void
-    {
+    register(): void {
         // -----------------------------------------------------------------------------------------------------
         // @ FAQs - GET
         // -----------------------------------------------------------------------------------------------------
@@ -65,8 +68,7 @@ export class HelpCenterMockApi implements TreoMockApi
                 const categories = cloneDeep(this._faqCategories);
 
                 // If slug is not provided...
-                if ( !slug )
-                {
+                if (!slug) {
                     // Go through each category and set the results
                     categories.forEach((category) => {
 
@@ -79,8 +81,7 @@ export class HelpCenterMockApi implements TreoMockApi
                     });
                 }
                 // Otherwise...
-                else
-                {
+                else {
                     // Find the category by the slug
                     const category = categories.find(item => item.slug === slug);
 
@@ -120,8 +121,7 @@ export class HelpCenterMockApi implements TreoMockApi
                 const categories = cloneDeep(this._guideCategories);
 
                 // If slug is not provided...
-                if ( !slug )
-                {
+                if (!slug) {
                     // Parse the limit as an integer
                     const limitNum = parseInt(limit, 10);
 
@@ -132,15 +132,14 @@ export class HelpCenterMockApi implements TreoMockApi
                             {
                                 ...category,
                                 visibleGuides: limitNum,
-                                totalGuides  : guides.filter(guide => guide.categoryId === category.id).length,
-                                guides       : guides.filter(guide => guide.categoryId === category.id).slice(0, limitNum)
+                                totalGuides: guides.filter(guide => guide.categoryId === category.id).length,
+                                guides: guides.filter(guide => guide.categoryId === category.id).slice(0, limitNum)
                             }
                         );
                     });
                 }
                 // Otherwise...
-                else
-                {
+                else {
                     // Find the category by the slug
                     const category = categories.find(item => item.slug === slug);
 

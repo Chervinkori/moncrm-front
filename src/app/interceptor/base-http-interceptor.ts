@@ -1,8 +1,14 @@
 import {Observable} from 'rxjs';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 
+/**
+ * Базовый Http интерцептор.
+ */
 export abstract class BaseHttpInterceptor implements HttpInterceptor {
-
+    /**
+     * @param request
+     * @param next
+     */
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (!this.support(request)) {
             return next.handle(request);
@@ -12,7 +18,7 @@ export abstract class BaseHttpInterceptor implements HttpInterceptor {
     }
 
     /**
-     * Проверяет поддерживает ли интерцептор данный запрос.
+     * Проверка поддерживает ли интерцептор данный запрос.
      *
      * @param request
      */

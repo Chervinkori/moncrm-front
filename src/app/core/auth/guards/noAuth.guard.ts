@@ -18,12 +18,6 @@ import {switchMap} from 'rxjs/operators';
     providedIn: 'root'
 })
 export class NoAuthGuard implements CanActivate, CanActivateChild, CanLoad {
-    /**
-     * Constructor
-     *
-     * @param {AuthService} _authService
-     * @param {Router} _router
-     */
     constructor(
         private _authService: AuthService,
         private _router: Router
@@ -35,7 +29,8 @@ export class NoAuthGuard implements CanActivate, CanActivateChild, CanLoad {
     // -----------------------------------------------------------------------------------------------------
 
     /**
-     * Check the authenticated status
+     * Проверяет статус авторизации пользователя в системе.
+     * Если пользователь не авторизован отправляет запрос на обновление токена доступа.
      *
      * @private
      */
@@ -44,13 +39,10 @@ export class NoAuthGuard implements CanActivate, CanActivateChild, CanLoad {
         return this._authService.isAuth()
             .pipe(
                 switchMap((authenticated) => {
-
-                    // If the user is authenticated...
                     if (authenticated) {
-                        // Redirect to the root
+                        // Перенаправление на главную страницу
                         this._router.navigate(['']);
 
-                        // Prevent the access
                         return of(false);
                     }
 

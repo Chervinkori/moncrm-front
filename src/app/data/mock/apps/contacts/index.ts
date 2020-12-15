@@ -1,17 +1,16 @@
-import { Injectable } from '@angular/core';
-import { from } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { assign, cloneDeep } from 'lodash-es';
-import { TreoMockApi } from '@treo/lib/mock-api/mock-api.interfaces';
-import { TreoMockApiUtils } from '@treo/lib/mock-api/mock-api.utils';
-import { TreoMockApiService } from '@treo/lib/mock-api/mock-api.service';
-import { contacts as contactsData, countries as countriesData, tags as tagsData } from 'app/data/mock/apps/contacts/data';
+import {Injectable} from '@angular/core';
+import {from} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {assign, cloneDeep} from 'lodash-es';
+import {TreoMockApi} from '@treo/lib/mock-api/mock-api.interfaces';
+import {TreoMockApiUtils} from '@treo/lib/mock-api/mock-api.utils';
+import {TreoMockApiService} from '@treo/lib/mock-api/mock-api.service';
+import {contacts as contactsData, countries as countriesData, tags as tagsData} from 'app/data/mock/apps/contacts/data';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ContactsMockApi implements TreoMockApi
-{
+export class ContactsMockApi implements TreoMockApi {
     // Private
     private _contacts: any[];
     private _countries: any[];
@@ -24,8 +23,7 @@ export class ContactsMockApi implements TreoMockApi
      */
     constructor(
         private _treoMockApiService: TreoMockApiService
-    )
-    {
+    ) {
         // Set the data
         this._contacts = contactsData;
         this._countries = countriesData;
@@ -42,8 +40,7 @@ export class ContactsMockApi implements TreoMockApi
     /**
      * Register
      */
-    register(): void
-    {
+    register(): void {
         // -----------------------------------------------------------------------------------------------------
         // @ Contacts - GET
         // -----------------------------------------------------------------------------------------------------
@@ -77,8 +74,7 @@ export class ContactsMockApi implements TreoMockApi
                 let contacts = cloneDeep(this._contacts);
 
                 // If the query exists...
-                if ( query )
-                {
+                if (query) {
                     // Filter the contacts
                     contacts = contacts.filter((contact) => {
                         return contact.name && contact.name.toLowerCase().includes(query.toLowerCase());
@@ -127,19 +123,19 @@ export class ContactsMockApi implements TreoMockApi
 
                 // Generate a new contact
                 const newContact = {
-                    id          : TreoMockApiUtils.guid(),
-                    avatar      : null,
-                    name        : 'New Contact',
-                    emails      : [],
+                    id: TreoMockApiUtils.guid(),
+                    avatar: null,
+                    name: 'New Contact',
+                    emails: [],
                     phoneNumbers: [],
-                    job         : {
-                        title  : '',
+                    job: {
+                        title: '',
                         company: ''
                     },
-                    birthday    : null,
-                    address     : null,
-                    notes       : null,
-                    tags        : []
+                    birthday: null,
+                    address: null,
+                    notes: null,
+                    tags: []
                 };
 
                 // Unshift the new contact
@@ -168,8 +164,7 @@ export class ContactsMockApi implements TreoMockApi
                 // Find the contact and update it
                 this._contacts.forEach((item, index, contacts) => {
 
-                    if ( item.id === id )
-                    {
+                    if (item.id === id) {
                         // Update the contact
                         contacts[index] = assign({}, contacts[index], contact);
 
@@ -197,8 +192,7 @@ export class ContactsMockApi implements TreoMockApi
                 // Find the contact and delete it
                 this._contacts.forEach((item, index) => {
 
-                    if ( item.id === id )
-                    {
+                    if (item.id === id) {
                         this._contacts.splice(index, 1);
                     }
                 });
@@ -274,8 +268,7 @@ export class ContactsMockApi implements TreoMockApi
                 // Find the tag and update it
                 this._tags.forEach((item, index, tags) => {
 
-                    if ( item.id === id )
-                    {
+                    if (item.id === id) {
                         // Update the tag
                         tags[index] = assign({}, tags[index], tag);
 
@@ -303,8 +296,7 @@ export class ContactsMockApi implements TreoMockApi
                 // Find the tag and delete it
                 this._tags.forEach((item, index) => {
 
-                    if ( item.id === id )
-                    {
+                    if (item.id === id) {
                         this._tags.splice(index, 1);
                     }
                 });
@@ -378,8 +370,7 @@ export class ContactsMockApi implements TreoMockApi
                         // Find the contact and update it
                         this._contacts.forEach((item, index, contacts) => {
 
-                            if ( item.id === id )
-                            {
+                            if (item.id === id) {
                                 // Update the avatar
                                 contacts[index].avatar = path;
 

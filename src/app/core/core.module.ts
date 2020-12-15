@@ -1,31 +1,24 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { DomSanitizer } from '@angular/platform-browser';
-import { MatIconRegistry } from '@angular/material/icon';
-import { AuthService } from 'app/core/auth/auth.service';
-import { AuthInterceptor } from 'app/core/auth/auth.interceptor';
-import {RefreshAccessTokenInterceptor} from './auth/refresh-access-token.interceptor';
+import {NgModule, Optional, SkipSelf} from '@angular/core';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {DomSanitizer} from '@angular/platform-browser';
+import {MatIconRegistry} from '@angular/material/icon';
+import {AuthService} from 'app/core/auth/auth.service';
+import {AuthInterceptor} from 'app/core/auth/auth.interceptor';
 
 @NgModule({
-    imports  : [
+    imports: [
         HttpClientModule
     ],
     providers: [
         AuthService,
         {
-            provide : HTTP_INTERCEPTORS,
+            provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
-            multi   : true
-        },
-        {
-            provide : HTTP_INTERCEPTORS,
-            useClass: RefreshAccessTokenInterceptor,
-            multi   : true
+            multi: true
         }
     ]
 })
-export class CoreModule
-{
+export class CoreModule {
     /**
      * Constructor
      *
@@ -37,11 +30,9 @@ export class CoreModule
         private _domSanitizer: DomSanitizer,
         private _matIconRegistry: MatIconRegistry,
         @Optional() @SkipSelf() parentModule?: CoreModule
-    )
-    {
+    ) {
         // Do not allow multiple injections
-        if ( parentModule )
-        {
+        if (parentModule) {
             throw new Error('CoreModule has already been loaded. Import this module in the AppModule only.');
         }
 

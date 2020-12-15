@@ -2,17 +2,17 @@ import * as moment from 'moment';
 
 /* tslint:disable:max-line-length */
 export const crypto = {
-    btc      : {
-        amount     : 8878.48,
-        trend      : {
-            dir   : 'up',
+    btc: {
+        amount: 8878.48,
+        trend: {
+            dir: 'up',
             amount: 0.17
         },
-        marketCap  : 148752956966,
-        volume     : 22903438381,
-        supply     : 18168448,
+        marketCap: 148752956966,
+        volume: 22903438381,
+        supply: 18168448,
         allTimeHigh: 19891.00,
-        price      : {
+        price: {
             series: [
                 {
                     name: 'Price',
@@ -602,13 +602,13 @@ export const crypto = {
             ]
         }
     },
-    prices   : {
+    prices: {
         btc: 8878.48,
         eth: 170.46,
         bch: 359.93,
         xrp: 0.23512
     },
-    wallets  : {
+    wallets: {
         btc: 24.97311243,
         eth: 126.3212,
         bch: 78.454412,
@@ -616,11 +616,11 @@ export const crypto = {
     },
     watchlist: [
         {
-            title : 'Ethereum',
-            iso   : 'ETH',
+            title: 'Ethereum',
+            iso: 'ETH',
             amount: 170.46,
-            trend : {
-                dir   : 'up',
+            trend: {
+                dir: 'up',
                 amount: 2.35
             },
             series: [
@@ -712,11 +712,11 @@ export const crypto = {
             ]
         },
         {
-            title : 'Bitcoin Cash',
-            iso   : 'BCH',
+            title: 'Bitcoin Cash',
+            iso: 'BCH',
             amount: 359.93,
-            trend : {
-                dir   : 'up',
+            trend: {
+                dir: 'up',
                 amount: 9.94
             },
             series: [
@@ -808,11 +808,11 @@ export const crypto = {
             ]
         },
         {
-            title : 'XRP',
-            iso   : 'XRP',
+            title: 'XRP',
+            iso: 'XRP',
             amount: 0.23512,
-            trend : {
-                dir   : 'down',
+            trend: {
+                dir: 'down',
                 amount: 0.35
             },
             series: [
@@ -904,11 +904,11 @@ export const crypto = {
             ]
         },
         {
-            title : 'Litecoin',
-            iso   : 'LTC',
+            title: 'Litecoin',
+            iso: 'LTC',
             amount: 60.15,
-            trend : {
-                dir   : 'up',
+            trend: {
+                dir: 'up',
                 amount: 0.99
             },
             series: [
@@ -1000,11 +1000,11 @@ export const crypto = {
             ]
         },
         {
-            title : 'Zcash',
-            iso   : 'ZEC',
+            title: 'Zcash',
+            iso: 'ZEC',
             amount: 58.41,
-            trend : {
-                dir   : 'down',
+            trend: {
+                dir: 'down',
                 amount: 8.79
             },
             series: [
@@ -1096,11 +1096,11 @@ export const crypto = {
             ]
         },
         {
-            title : 'Bitcoin Gold',
-            iso   : 'BTG',
+            title: 'Bitcoin Gold',
+            iso: 'BTG',
             amount: 12.23,
-            trend : {
-                dir   : 'down',
+            trend: {
+                dir: 'down',
                 amount: 4.42
             },
             series: [

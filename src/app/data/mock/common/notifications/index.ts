@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
-import { assign, cloneDeep } from 'lodash-es';
-import { TreoMockApi } from '@treo/lib/mock-api/mock-api.interfaces';
-import { TreoMockApiService } from '@treo/lib/mock-api/mock-api.service';
-import { TreoMockApiUtils } from '@treo/lib/mock-api/mock-api.utils';
-import { notifications as notificationsData } from 'app/data/mock/common/notifications/data';
+import {Injectable} from '@angular/core';
+import {assign, cloneDeep} from 'lodash-es';
+import {TreoMockApi} from '@treo/lib/mock-api/mock-api.interfaces';
+import {TreoMockApiService} from '@treo/lib/mock-api/mock-api.service';
+import {TreoMockApiUtils} from '@treo/lib/mock-api/mock-api.utils';
+import {notifications as notificationsData} from 'app/data/mock/common/notifications/data';
 
 @Injectable({
     providedIn: 'root'
 })
-export class NotificationsMockApi implements TreoMockApi
-{
+export class NotificationsMockApi implements TreoMockApi {
     // Private
     private _notifications: any;
 
@@ -20,8 +19,7 @@ export class NotificationsMockApi implements TreoMockApi
      */
     constructor(
         private _treoMockApiService: TreoMockApiService
-    )
-    {
+    ) {
         // Set the data
         this._notifications = notificationsData;
 
@@ -36,8 +34,7 @@ export class NotificationsMockApi implements TreoMockApi
     /**
      * Register
      */
-    register(): void
-    {
+    register(): void {
         // -----------------------------------------------------------------------------------------------------
         // @ Notifications - GET
         // -----------------------------------------------------------------------------------------------------
@@ -91,8 +88,7 @@ export class NotificationsMockApi implements TreoMockApi
                 // Find the notification and update it
                 this._notifications.forEach((item, index, notifications) => {
 
-                    if ( item.id === id )
-                    {
+                    if (item.id === id) {
                         // Update the notification
                         notifications[index] = assign({}, notifications[index], notification);
 
@@ -172,8 +168,7 @@ export class NotificationsMockApi implements TreoMockApi
                 // Find the notification and update it
                 this._notifications.forEach((item, index, notifications) => {
 
-                    if ( item.id === notification.id )
-                    {
+                    if (item.id === notification.id) {
                         // Update the notification
                         notifications[index].read = notification.read;
 

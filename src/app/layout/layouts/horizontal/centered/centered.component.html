@@ -1,11 +1,11 @@
 <!-- Navigation -->
 <treo-vertical-navigation class="bg-cool-gray-900 theme-dark"
-                         *ngIf="isScreenSmall"
-                         [appearance]="'classic'"
-                         [mode]="'over'"
-                         [name]="'mainNavigation'"
-                         [navigation]="data.navigation.default"
-                         [opened]="false">
+                          *ngIf="isScreenSmall"
+                          [appearance]="'classic'"
+                          [mode]="'over'"
+                          [name]="'mainNavigation'"
+                          [navigation]="data.navigation.default"
+                          [opened]="false">
 
     <div treoVerticalNavigationContentHeader>
         <div class="logo">
@@ -36,8 +36,8 @@
 
             <!-- Horizontal navigation -->
             <treo-horizontal-navigation *ngIf="!isScreenSmall"
-                                       [name]="'mainNavigation'"
-                                       [navigation]="data.navigation.horizontal"></treo-horizontal-navigation>
+                                        [name]="'mainNavigation'"
+                                        [navigation]="data.navigation.horizontal"></treo-horizontal-navigation>
 
             <!-- Navigation toggle button -->
             <button class="navigation-toggle-button"

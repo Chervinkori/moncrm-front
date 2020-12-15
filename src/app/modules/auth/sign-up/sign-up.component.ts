@@ -1,18 +1,17 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { TreoAnimations } from '@treo/animations';
-import { AuthService } from 'app/core/auth/auth.service';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Subject} from 'rxjs';
+import {TreoAnimations} from '@treo/animations';
+import {AuthService} from 'app/core/auth/auth.service';
 
 @Component({
-    selector     : 'auth-sign-up',
-    templateUrl  : './sign-up.component.html',
-    styleUrls    : ['./sign-up.component.scss'],
+    selector: 'auth-sign-up',
+    templateUrl: './sign-up.component.html',
+    styleUrls: ['./sign-up.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations   : TreoAnimations
+    animations: TreoAnimations
 })
-export class AuthSignUpComponent implements OnInit, OnDestroy
-{
+export class AuthSignUpComponent implements OnInit, OnDestroy {
     message: any;
     signUpForm: FormGroup;
 
@@ -28,8 +27,7 @@ export class AuthSignUpComponent implements OnInit, OnDestroy
     constructor(
         private _authService: AuthService,
         private _formBuilder: FormBuilder
-    )
-    {
+    ) {
         // Set the defaults
         this.message = null;
 
@@ -44,14 +42,13 @@ export class AuthSignUpComponent implements OnInit, OnDestroy
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         // Create the form
         this.signUpForm = this._formBuilder.group({
-                name      : ['', Validators.required],
-                email     : ['', [Validators.required, Validators.email]],
-                password  : ['', Validators.required],
-                company   : [''],
+                name: ['', Validators.required],
+                email: ['', [Validators.required, Validators.email]],
+                password: ['', Validators.required],
+                company: [''],
                 agreements: ['', Validators.requiredTrue]
             }
         );
@@ -60,8 +57,7 @@ export class AuthSignUpComponent implements OnInit, OnDestroy
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
@@ -74,11 +70,9 @@ export class AuthSignUpComponent implements OnInit, OnDestroy
     /**
      * Sign up
      */
-    signUp(): void
-    {
+    signUp(): void {
         // Do nothing if the form is invalid
-        if ( this.signUpForm.invalid )
-        {
+        if (this.signUpForm.invalid) {
             return;
         }
 
@@ -102,10 +96,10 @@ export class AuthSignUpComponent implements OnInit, OnDestroy
             // Show the message
             this.message = {
                 appearance: 'outline',
-                content   : 'Your account has been created and a confirmation mail has been sent to your email address.',
-                shake     : false,
-                showIcon  : false,
-                type      : 'success'
+                content: 'Your account has been created and a confirmation mail has been sent to your email address.',
+                shake: false,
+                showIcon: false,
+                type: 'success'
             };
         }, 1000);
     }

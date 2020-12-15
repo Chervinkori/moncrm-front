@@ -2,26 +2,26 @@
 
 auth-sign-up {
 
-    .content-layout {
-        align-items: center;
-        justify-content: center;
+  .content-layout {
+    align-items: center;
+    justify-content: center;
 
-        treo-card {
+    treo-card {
 
-            .form-container {
+      .form-container {
 
-                .form {
+        .form {
 
-                    .field-footer {
+          .field-footer {
 
-                        .link {
-                            margin: 0 4px;
-                        }
-                    }
-                }
+            .link {
+              margin: 0 4px;
             }
+          }
         }
+      }
     }
+  }
 }
 
 // -----------------------------------------------------------------------------------------------------

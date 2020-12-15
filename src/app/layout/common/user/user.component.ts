@@ -1,20 +1,27 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { User } from 'app/layout/common/user/user.types';
-import { UserService } from 'app/layout/common/user/user.service';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    Input,
+    OnDestroy,
+    OnInit,
+    ViewEncapsulation
+} from '@angular/core';
+import {Router} from '@angular/router';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {User} from 'app/layout/common/user/user.types';
+import {UserService} from 'app/layout/common/user/user.service';
 
 @Component({
-    selector       : 'user',
-    templateUrl    : './user.component.html',
-    styleUrls      : ['./user.component.scss'],
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'user',
+    templateUrl: './user.component.html',
+    styleUrls: ['./user.component.scss'],
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    exportAs       : 'user'
+    exportAs: 'user'
 })
-export class UserComponent implements OnInit, OnDestroy
-{
+export class UserComponent implements OnInit, OnDestroy {
     @Input()
     showAvatar: boolean;
 
@@ -33,8 +40,7 @@ export class UserComponent implements OnInit, OnDestroy
         private _changeDetectorRef: ChangeDetectorRef,
         private _router: Router,
         private _userService: UserService
-    )
-    {
+    ) {
         // Set the private defaults
         this._unsubscribeAll = new Subject();
 
@@ -52,8 +58,7 @@ export class UserComponent implements OnInit, OnDestroy
      * @param value
      */
     @Input()
-    set user(value: User)
-    {
+    set user(value: User) {
         // Save the user
         this._user = value;
 
@@ -61,8 +66,7 @@ export class UserComponent implements OnInit, OnDestroy
         this._userService.user = value;
     }
 
-    get user(): User
-    {
+    get user(): User {
         return this._user;
     }
 
@@ -73,8 +77,7 @@ export class UserComponent implements OnInit, OnDestroy
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         // Subscribe to user changes
         this._userService.user$
             .pipe(takeUntil(this._unsubscribeAll))
@@ -86,8 +89,7 @@ export class UserComponent implements OnInit, OnDestroy
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
@@ -102,8 +104,7 @@ export class UserComponent implements OnInit, OnDestroy
      *
      * @param status
      */
-    updateUserStatus(status): void
-    {
+    updateUserStatus(status): void {
         // Update the user data
         this.user.status = status;
 
@@ -114,8 +115,7 @@ export class UserComponent implements OnInit, OnDestroy
     /**
      * Sign out
      */
-    signOut(): void
-    {
+    signOut(): void {
         this._router.navigate(['/sign-out']);
     }
 }

@@ -1,16 +1,15 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { TreoAnimations } from '@treo/animations';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {TreoAnimations} from '@treo/animations';
 
 @Component({
-    selector     : 'auth-unlock-session',
-    templateUrl  : './unlock-session.component.html',
-    styleUrls    : ['./unlock-session.component.scss'],
+    selector: 'auth-unlock-session',
+    templateUrl: './unlock-session.component.html',
+    styleUrls: ['./unlock-session.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations   : TreoAnimations
+    animations: TreoAnimations
 })
-export class AuthUnlockSessionComponent implements OnInit
-{
+export class AuthUnlockSessionComponent implements OnInit {
     message: any;
     name: string;
     unlockSessionForm: FormGroup;
@@ -22,8 +21,7 @@ export class AuthUnlockSessionComponent implements OnInit
      */
     constructor(
         private _formBuilder: FormBuilder
-    )
-    {
+    ) {
         // Set the defaults
         this.message = null;
     }
@@ -35,16 +33,15 @@ export class AuthUnlockSessionComponent implements OnInit
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         // Get the user's name
         this.name = 'Andrew Watkins';
 
         // Create the form
         this.unlockSessionForm = this._formBuilder.group({
-            name    : [
+            name: [
                 {
-                    value   : this.name,
+                    value: this.name,
                     disabled: true
                 }
             ],
@@ -59,8 +56,7 @@ export class AuthUnlockSessionComponent implements OnInit
     /**
      * Unlock
      */
-    unlock(): void
-    {
+    unlock(): void {
         // Disable the form
         this.unlockSessionForm.disable();
 
@@ -78,7 +74,7 @@ export class AuthUnlockSessionComponent implements OnInit
             // Reset the form
             this.unlockSessionForm.reset({
                 name: {
-                    value   : this.name,
+                    value: this.name,
                     disabled: true
                 }
             });
@@ -86,10 +82,10 @@ export class AuthUnlockSessionComponent implements OnInit
             // Show the message
             this.message = {
                 appearance: 'outline',
-                content   : 'Invalid password',
-                shake     : true,
-                showIcon  : false,
-                type      : 'error'
+                content: 'Invalid password',
+                shake: true,
+                showIcon: false,
+                type: 'error'
             };
         }, 1000);
     }

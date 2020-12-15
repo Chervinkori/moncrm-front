@@ -1,16 +1,15 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TreoAnimations } from '@treo/animations';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {TreoAnimations} from '@treo/animations';
 
 @Component({
-    selector     : 'auth-forgot-password',
-    templateUrl  : './forgot-password.component.html',
-    styleUrls    : ['./forgot-password.component.scss'],
+    selector: 'auth-forgot-password',
+    templateUrl: './forgot-password.component.html',
+    styleUrls: ['./forgot-password.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations   : TreoAnimations
+    animations: TreoAnimations
 })
-export class AuthForgotPasswordComponent implements OnInit
-{
+export class AuthForgotPasswordComponent implements OnInit {
     forgotPasswordForm: FormGroup;
     message: any;
 
@@ -21,8 +20,7 @@ export class AuthForgotPasswordComponent implements OnInit
      */
     constructor(
         private _formBuilder: FormBuilder
-    )
-    {
+    ) {
         // Set the defaults
         this.message = null;
     }
@@ -34,8 +32,7 @@ export class AuthForgotPasswordComponent implements OnInit
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         // Create the form
         this.forgotPasswordForm = this._formBuilder.group({
             email: ['', [Validators.required, Validators.email]]
@@ -49,11 +46,9 @@ export class AuthForgotPasswordComponent implements OnInit
     /**
      * Send the reset link
      */
-    sendResetLink(): void
-    {
+    sendResetLink(): void {
         // Do nothing if the form is invalid
-        if ( this.forgotPasswordForm.invalid )
-        {
+        if (this.forgotPasswordForm.invalid) {
             return;
         }
 
@@ -77,10 +72,10 @@ export class AuthForgotPasswordComponent implements OnInit
             // Show the message
             this.message = {
                 appearance: 'outline',
-                content   : 'Password reset sent! You\'ll receive an email if you are registered on our system.',
-                shake     : false,
-                showIcon  : false,
-                type      : 'success'
+                content: 'Password reset sent! You\'ll receive an email if you are registered on our system.',
+                shake: false,
+                showIcon: false,
+                type: 'success'
             };
         }, 1000);
     }

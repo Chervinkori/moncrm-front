@@ -1,18 +1,17 @@
-import { Component, HostBinding, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Data, Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { TreoMediaWatcherService } from '@treo/services/media-watcher';
-import { TreoNavigationService } from '@treo/components/navigation';
+import {Component, HostBinding, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {ActivatedRoute, Data, Router} from '@angular/router';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {TreoMediaWatcherService} from '@treo/services/media-watcher';
+import {TreoNavigationService} from '@treo/components/navigation';
 
 @Component({
-    selector     : 'material-layout',
-    templateUrl  : './material.component.html',
-    styleUrls    : ['./material.component.scss'],
+    selector: 'material-layout',
+    templateUrl: './material.component.html',
+    styleUrls: ['./material.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class MaterialLayoutComponent implements OnInit, OnDestroy
-{
+export class MaterialLayoutComponent implements OnInit, OnDestroy {
     data: any;
     isScreenSmall: boolean;
 
@@ -38,8 +37,7 @@ export class MaterialLayoutComponent implements OnInit, OnDestroy
         private _router: Router,
         private _treoMediaWatcherService: TreoMediaWatcherService,
         private _treoNavigationService: TreoNavigationService
-    )
-    {
+    ) {
         // Set the private defaults
         this._unsubscribeAll = new Subject();
 
@@ -55,8 +53,7 @@ export class MaterialLayoutComponent implements OnInit, OnDestroy
     /**
      * Getter for current year
      */
-    get currentYear(): number
-    {
+    get currentYear(): number {
         return new Date().getFullYear();
     }
 
@@ -67,8 +64,7 @@ export class MaterialLayoutComponent implements OnInit, OnDestroy
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         // Subscribe to the resolved route data
         this._activatedRoute.data.subscribe((data: Data) => {
             this.data = data.initialData;
@@ -87,8 +83,7 @@ export class MaterialLayoutComponent implements OnInit, OnDestroy
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
@@ -103,13 +98,11 @@ export class MaterialLayoutComponent implements OnInit, OnDestroy
      *
      * @param key
      */
-    toggleNavigation(key): void
-    {
+    toggleNavigation(key): void {
         // Get the navigation
         const navigation = this._treoNavigationService.getComponent(key);
 
-        if ( navigation )
-        {
+        if (navigation) {
             // Toggle the opened status
             navigation.toggle();
         }

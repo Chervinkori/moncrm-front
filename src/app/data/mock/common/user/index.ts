@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
-import { assign, cloneDeep } from 'lodash-es';
-import { TreoMockApi } from '@treo/lib/mock-api/mock-api.interfaces';
-import { TreoMockApiService } from '@treo/lib/mock-api/mock-api.service';
-import { user as userData } from 'app/data/mock/common/user/data';
+import {Injectable} from '@angular/core';
+import {assign, cloneDeep} from 'lodash-es';
+import {TreoMockApi} from '@treo/lib/mock-api/mock-api.interfaces';
+import {TreoMockApiService} from '@treo/lib/mock-api/mock-api.service';
+import {user as userData} from 'app/data/mock/common/user/data';
 
 @Injectable({
     providedIn: 'root'
 })
-export class UserMockApi implements TreoMockApi
-{
+export class UserMockApi implements TreoMockApi {
     // Private
     private _user: any;
 
@@ -19,8 +18,7 @@ export class UserMockApi implements TreoMockApi
      */
     constructor(
         private _treoMockApiService: TreoMockApiService
-    )
-    {
+    ) {
         // Set the data
         this._user = userData;
 
@@ -35,8 +33,7 @@ export class UserMockApi implements TreoMockApi
     /**
      * Register
      */
-    register(): void
-    {
+    register(): void {
         // -----------------------------------------------------------------------------------------------------
         // @ User - GET
         // -----------------------------------------------------------------------------------------------------

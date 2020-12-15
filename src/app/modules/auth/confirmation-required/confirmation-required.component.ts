@@ -1,22 +1,20 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { TreoAnimations } from '@treo/animations';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {TreoAnimations} from '@treo/animations';
 
 @Component({
-    selector     : 'auth-confirmation-required',
-    templateUrl  : './confirmation-required.component.html',
-    styleUrls    : ['./confirmation-required.component.scss'],
+    selector: 'auth-confirmation-required',
+    templateUrl: './confirmation-required.component.html',
+    styleUrls: ['./confirmation-required.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations   : TreoAnimations
+    animations: TreoAnimations
 })
-export class AuthConfirmationRequiredComponent implements OnInit
-{
+export class AuthConfirmationRequiredComponent implements OnInit {
     email: string;
 
     /**
      * Constructor
      */
-    constructor()
-    {
+    constructor() {
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -26,8 +24,7 @@ export class AuthConfirmationRequiredComponent implements OnInit
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         // Get the user's email
         this.email = 'watkins.andrew@company.com';
     }

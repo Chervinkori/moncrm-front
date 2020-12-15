@@ -2,23 +2,23 @@
 
 auth-confirmation-required {
 
-    .content-layout {
-        align-items: center;
-        justify-content: center;
+  .content-layout {
+    align-items: center;
+    justify-content: center;
 
-        treo-card {
+    treo-card {
 
-            .form-container {
+      .form-container {
 
-                .form {
+        .form {
 
-                    .description {
-                        margin-top: 16px;
-                    }
-                }
-            }
+          .description {
+            margin-top: 16px;
+          }
         }
+      }
     }
+  }
 }
 
 // -----------------------------------------------------------------------------------------------------

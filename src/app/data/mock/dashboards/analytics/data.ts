@@ -2,7 +2,7 @@ import * as moment from 'moment';
 
 /* tslint:disable:max-line-length */
 export const analytics = {
-    age                 : {
+    age: {
         series: [35, 65],
         labels: [
             'Under 30',
@@ -11,7 +11,7 @@ export const analytics = {
     },
     averagePurchaseValue: {
         amount: 152.46,
-        data  : [
+        data: [
             44.82,
             46.19,
             47.69,
@@ -81,7 +81,7 @@ export const analytics = {
             38.12
         ]
     },
-    browsers            : {
+    browsers: {
         amount: 46085,
         series: [
             {
@@ -102,7 +102,7 @@ export const analytics = {
             }
         ]
     },
-    channels            : {
+    channels: {
         amount: 46085,
         series: [
             {
@@ -123,7 +123,7 @@ export const analytics = {
             }
         ]
     },
-    devices             : {
+    devices: {
         amount: 46085,
         series: [
             {
@@ -144,30 +144,30 @@ export const analytics = {
             }
         ]
     },
-    gender              : {
+    gender: {
         series: [55, 45],
         labels: [
             'Male',
             'Female'
         ]
     },
-    language            : {
+    language: {
         series: [75, 25],
         labels: [
             'Non-English',
             'English'
         ]
     },
-    newVsReturning      : {
+    newVsReturning: {
         series: [80, 20],
         labels: [
             'New',
             'Returning'
         ]
     },
-    purchases           : {
+    purchases: {
         amount: 17663,
-        data  : [4412, 4345, 4541, 4677, 4322, 4123],
+        data: [4412, 4345, 4541, 4677, 4322, 4123],
         labels: [
             moment().subtract(47, 'days').format('DD MMM') + ' - ' + moment().subtract(40, 'days').format('DD MMM'),
             moment().subtract(39, 'days').format('DD MMM') + ' - ' + moment().subtract(32, 'days').format('DD MMM'),
@@ -177,9 +177,9 @@ export const analytics = {
             moment().subtract(7, 'days').format('DD MMM') + ' - ' + moment().format('DD MMM')
         ]
     },
-    refunds             : {
+    refunds: {
         amount: 4523.11,
-        data  : [
+        data: [
             20.21,
             17.49,
             16.54,
@@ -259,9 +259,9 @@ export const analytics = {
             29.09
         ]
     },
-    totalVisits         : {
+    totalVisits: {
         amount: 62083,
-        data  : [15521, 15519, 15522, 15521],
+        data: [15521, 15519, 15522, 15521],
         labels: [
             moment().subtract(31, 'days').format('DD MMM') + ' - ' + moment().subtract(24, 'days').format('DD MMM'),
             moment().subtract(23, 'days').format('DD MMM') + ' - ' + moment().subtract(16, 'days').format('DD MMM'),
@@ -269,9 +269,9 @@ export const analytics = {
             moment().subtract(7, 'days').format('DD MMM') + ' - ' + moment().format('DD MMM')
         ]
     },
-    uniquePurchases     : {
+    uniquePurchases: {
         amount: 2716,
-        data  : [
+        data: [
             48.84,
             53.51,
             52.93,
@@ -351,9 +351,9 @@ export const analytics = {
             60.26
         ]
     },
-    uniqueVisitors      : {
+    uniqueVisitors: {
         amount: 46085,
-        data  : [11577, 11441, 11544, 11523],
+        data: [11577, 11441, 11544, 11523],
         labels: [
             moment().subtract(31, 'days').format('DD MMM') + ' - ' + moment().subtract(24, 'days').format('DD MMM'),
             moment().subtract(23, 'days').format('DD MMM') + ' - ' + moment().subtract(16, 'days').format('DD MMM'),

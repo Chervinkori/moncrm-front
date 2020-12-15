@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
-import { assign, cloneDeep } from 'lodash-es';
-import { TreoMockApi } from '@treo/lib/mock-api/mock-api.interfaces';
-import { TreoMockApiService } from '@treo/lib/mock-api/mock-api.service';
-import { TreoMockApiUtils } from '@treo/lib/mock-api/mock-api.utils';
-import { messages as messagesData } from 'app/data/mock/common/messages/data';
+import {Injectable} from '@angular/core';
+import {assign, cloneDeep} from 'lodash-es';
+import {TreoMockApi} from '@treo/lib/mock-api/mock-api.interfaces';
+import {TreoMockApiService} from '@treo/lib/mock-api/mock-api.service';
+import {TreoMockApiUtils} from '@treo/lib/mock-api/mock-api.utils';
+import {messages as messagesData} from 'app/data/mock/common/messages/data';
 
 @Injectable({
     providedIn: 'root'
 })
-export class MessagesMockApi implements TreoMockApi
-{
+export class MessagesMockApi implements TreoMockApi {
     // Private
     private _messages: any;
 
@@ -20,8 +19,7 @@ export class MessagesMockApi implements TreoMockApi
      */
     constructor(
         private _treoMockApiService: TreoMockApiService
-    )
-    {
+    ) {
         // Set the data
         this._messages = messagesData;
 
@@ -36,8 +34,7 @@ export class MessagesMockApi implements TreoMockApi
     /**
      * Register
      */
-    register(): void
-    {
+    register(): void {
         // -----------------------------------------------------------------------------------------------------
         // @ Messages - GET
         // -----------------------------------------------------------------------------------------------------
@@ -91,8 +88,7 @@ export class MessagesMockApi implements TreoMockApi
                 // Find the message and update it
                 this._messages.forEach((item, index, messages) => {
 
-                    if ( item.id === id )
-                    {
+                    if (item.id === id) {
                         // Update the message
                         messages[index] = assign({}, messages[index], message);
 
@@ -172,8 +168,7 @@ export class MessagesMockApi implements TreoMockApi
                 // Find the message and update it
                 this._messages.forEach((item, index, messages) => {
 
-                    if ( item.id === message.id )
-                    {
+                    if (item.id === message.id) {
                         // Update the message
                         messages[index].read = message.read;
 

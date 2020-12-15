@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
-import { assign, cloneDeep } from 'lodash-es';
-import { TreoMockApi } from '@treo/lib/mock-api/mock-api.interfaces';
-import { TreoMockApiUtils } from '@treo/lib/mock-api/mock-api.utils';
-import { TreoMockApiService } from '@treo/lib/mock-api/mock-api.service';
-import { tags as tagsData, tasks as tasksData } from 'app/data/mock/apps/tasks/data';
+import {Injectable} from '@angular/core';
+import {assign, cloneDeep} from 'lodash-es';
+import {TreoMockApi} from '@treo/lib/mock-api/mock-api.interfaces';
+import {TreoMockApiUtils} from '@treo/lib/mock-api/mock-api.utils';
+import {TreoMockApiService} from '@treo/lib/mock-api/mock-api.service';
+import {tags as tagsData, tasks as tasksData} from 'app/data/mock/apps/tasks/data';
 
 @Injectable({
     providedIn: 'root'
 })
-export class TasksMockApi implements TreoMockApi
-{
+export class TasksMockApi implements TreoMockApi {
     // Private
     private _tags: any[];
     private _tasks: any[];
@@ -21,8 +20,7 @@ export class TasksMockApi implements TreoMockApi
      */
     constructor(
         private _treoMockApiService: TreoMockApiService
-    )
-    {
+    ) {
         // Set the data
         this._tags = tagsData;
         this._tasks = tasksData;
@@ -38,8 +36,7 @@ export class TasksMockApi implements TreoMockApi
     /**
      * Register
      */
-    register(): void
-    {
+    register(): void {
         // -----------------------------------------------------------------------------------------------------
         // @ Tags - GET
         // -----------------------------------------------------------------------------------------------------
@@ -92,8 +89,7 @@ export class TasksMockApi implements TreoMockApi
                 // Find the tag and update it
                 this._tags.forEach((item, index, tags) => {
 
-                    if ( item.id === id )
-                    {
+                    if (item.id === id) {
                         // Update the tag
                         tags[index] = assign({}, tags[index], tag);
 
@@ -169,8 +165,7 @@ export class TasksMockApi implements TreoMockApi
                 let results;
 
                 // If the query exists...
-                if ( query )
-                {
+                if (query) {
                     // Clone the tasks
                     let tasks = cloneDeep(this._tasks);
 
@@ -189,8 +184,7 @@ export class TasksMockApi implements TreoMockApi
                     results = tasks;
                 }
                 // Otherwise, set the results to null
-                else
-                {
+                else {
                     results = null;
                 }
 
@@ -258,15 +252,15 @@ export class TasksMockApi implements TreoMockApi
 
                 // Generate a new task
                 const newTask = {
-                    id       : TreoMockApiUtils.guid(),
-                    type     : request.body.type,
-                    title    : '',
-                    notes    : null,
+                    id: TreoMockApiUtils.guid(),
+                    type: request.body.type,
+                    title: '',
+                    notes: null,
                     completed: false,
-                    dueDate  : null,
-                    priority : 1,
-                    tags     : [],
-                    order    : 0
+                    dueDate: null,
+                    priority: 1,
+                    tags: [],
+                    order: 0
                 };
 
                 // Unshift the new task
@@ -300,8 +294,7 @@ export class TasksMockApi implements TreoMockApi
                 // Find the task and update it
                 this._tasks.forEach((item, index, tasks) => {
 
-                    if ( item.id === id )
-                    {
+                    if (item.id === id) {
                         // Update the task
                         tasks[index] = assign({}, tasks[index], task);
 

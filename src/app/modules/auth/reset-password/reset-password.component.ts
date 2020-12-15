@@ -1,18 +1,17 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { TreoAnimations } from '@treo/animations';
-import { TreoValidators } from '@treo/validators';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Subject} from 'rxjs';
+import {TreoAnimations} from '@treo/animations';
+import {TreoValidators} from '@treo/validators';
 
 @Component({
-    selector     : 'auth-reset-password',
-    templateUrl  : './reset-password.component.html',
-    styleUrls    : ['./reset-password.component.scss'],
+    selector: 'auth-reset-password',
+    templateUrl: './reset-password.component.html',
+    styleUrls: ['./reset-password.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations   : TreoAnimations
+    animations: TreoAnimations
 })
-export class AuthResetPasswordComponent implements OnInit, OnDestroy
-{
+export class AuthResetPasswordComponent implements OnInit, OnDestroy {
     message: any;
     resetPasswordForm: FormGroup;
 
@@ -26,8 +25,7 @@ export class AuthResetPasswordComponent implements OnInit, OnDestroy
      */
     constructor(
         private _formBuilder: FormBuilder
-    )
-    {
+    ) {
         // Set the defaults
         this.message = null;
 
@@ -42,11 +40,10 @@ export class AuthResetPasswordComponent implements OnInit, OnDestroy
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         // Create the form
         this.resetPasswordForm = this._formBuilder.group({
-                password       : ['', Validators.required],
+                password: ['', Validators.required],
                 passwordConfirm: ['', Validators.required]
             },
             {
@@ -58,8 +55,7 @@ export class AuthResetPasswordComponent implements OnInit, OnDestroy
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
@@ -72,11 +68,9 @@ export class AuthResetPasswordComponent implements OnInit, OnDestroy
     /**
      * Reset password
      */
-    resetPassword(): void
-    {
+    resetPassword(): void {
         // Do nothing if the form is invalid
-        if ( this.resetPasswordForm.invalid )
-        {
+        if (this.resetPasswordForm.invalid) {
             return;
         }
 
@@ -100,10 +94,10 @@ export class AuthResetPasswordComponent implements OnInit, OnDestroy
             // Show the message
             this.message = {
                 appearance: 'outline',
-                content   : 'Your password has been reset.',
-                shake     : false,
-                showIcon  : false,
-                type      : 'success'
+                content: 'Your password has been reset.',
+                shake: false,
+                showIcon: false,
+                type: 'success'
             };
         }, 1000);
     }

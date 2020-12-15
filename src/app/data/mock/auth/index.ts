@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import Base64 from 'crypto-js/enc-base64';
 import HmacSHA256 from 'crypto-js/hmac-sha256';
 import Utf8 from 'crypto-js/enc-utf8';
-import { TreoMockApi } from '@treo/lib/mock-api/mock-api.interfaces';
-import { TreoMockApiService } from '@treo/lib/mock-api/mock-api.service';
+import {TreoMockApi} from '@treo/lib/mock-api/mock-api.interfaces';
+import {TreoMockApiService} from '@treo/lib/mock-api/mock-api.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class AuthMockApi implements TreoMockApi
-{
+export class AuthMockApi implements TreoMockApi {
     // Private Readonly
     private readonly _secret: any;
 
@@ -20,8 +19,7 @@ export class AuthMockApi implements TreoMockApi
      */
     constructor(
         private _treoMockApiService: TreoMockApiService
-    )
-    {
+    ) {
         // Set the data
         this._secret = 'YOUR_VERY_CONFIDENTIAL_SECRET_FOR_SIGNING_JWT_TOKENS!!!';
 
@@ -39,8 +37,7 @@ export class AuthMockApi implements TreoMockApi
      * @param source
      * @private
      */
-    private _base64url(source): string
-    {
+    private _base64url(source): string {
         // Encode in classical base64
         let encodedSource = Base64.stringify(source);
 
@@ -63,8 +60,7 @@ export class AuthMockApi implements TreoMockApi
      *
      * @private
      */
-    private _generateJWTToken(): string
-    {
+    private _generateJWTToken(): string {
         // Define token header
         const header = {
             alg: 'HS256',
@@ -106,8 +102,7 @@ export class AuthMockApi implements TreoMockApi
      * @param token
      * @private
      */
-    private _verifyJWTToken(token): boolean
-    {
+    private _verifyJWTToken(token): boolean {
         // Split the token into parts
         const parts = token.split('.');
         const header = parts[0];
@@ -128,8 +123,7 @@ export class AuthMockApi implements TreoMockApi
     /**
      * Register
      */
-    register(): void
-    {
+    register(): void {
         // -----------------------------------------------------------------------------------------------------
         // @ Sign in - POST
         // -----------------------------------------------------------------------------------------------------
@@ -139,13 +133,12 @@ export class AuthMockApi implements TreoMockApi
             .reply((request) => {
 
                 // Sign in successful
-                if ( request.body.email === 'watkins.andrew@company.com' && request.body.password === 'admin' )
-                {
+                if (request.body.email === 'watkins.andrew@company.com' && request.body.password === 'admin') {
                     return [
                         200,
                         {
                             access_token: this._generateJWTToken(),
-                            token_type  : 'bearer'
+                            token_type: 'bearer'
                         }
                     ];
                 }
@@ -169,7 +162,7 @@ export class AuthMockApi implements TreoMockApi
                     200,
                     {
                         access_token: this._generateJWTToken(),
-                        token_type  : 'bearer'
+                        token_type: 'bearer'
                     }
                 ];
             });

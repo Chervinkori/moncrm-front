@@ -1,17 +1,16 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
-import { interval, Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
-import { AuthService } from 'app/core/auth/auth.service';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {Router} from '@angular/router';
+import {interval, Subject} from 'rxjs';
+import {take, takeUntil} from 'rxjs/operators';
+import {AuthService} from 'app/core/auth/auth.service';
 
 @Component({
-    selector     : 'auth-sign-out',
-    templateUrl  : './sign-out.component.html',
-    styleUrls    : ['./sign-out.component.scss'],
+    selector: 'auth-sign-out',
+    templateUrl: './sign-out.component.html',
+    styleUrls: ['./sign-out.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class AuthSignOutComponent implements OnInit, OnDestroy
-{
+export class AuthSignOutComponent implements OnInit, OnDestroy {
     countdown: number;
     countdownMapping: any;
 
@@ -27,15 +26,14 @@ export class AuthSignOutComponent implements OnInit, OnDestroy
     constructor(
         private _authService: AuthService,
         private _router: Router
-    )
-    {
+    ) {
         // Set the private default
         this._unsubscribeAll = new Subject();
 
         // Set the defaults
         this.countdown = 5;
         this.countdownMapping = {
-            '=1'   : '# second',
+            '=1': '# second',
             'other': '# seconds'
         };
     }
@@ -47,8 +45,7 @@ export class AuthSignOutComponent implements OnInit, OnDestroy
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         // Sign out
         this._authService.signOut();
 
@@ -75,8 +72,7 @@ export class AuthSignOutComponent implements OnInit, OnDestroy
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();

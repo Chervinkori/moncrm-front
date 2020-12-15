@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
-import { cloneDeep } from 'lodash-es';
-import { TreoMockApi } from '@treo/lib/mock-api/mock-api.interfaces';
-import { TreoMockApiService } from '@treo/lib/mock-api/mock-api.service';
-import { crypto as cryptoData } from 'app/data/mock/dashboards/crypto/data';
+import {Injectable} from '@angular/core';
+import {cloneDeep} from 'lodash-es';
+import {TreoMockApi} from '@treo/lib/mock-api/mock-api.interfaces';
+import {TreoMockApiService} from '@treo/lib/mock-api/mock-api.service';
+import {crypto as cryptoData} from 'app/data/mock/dashboards/crypto/data';
 
 @Injectable({
     providedIn: 'root'
 })
-export class CryptoMockApi implements TreoMockApi
-{
+export class CryptoMockApi implements TreoMockApi {
     // Private
     private _crypto: any;
 
@@ -19,8 +18,7 @@ export class CryptoMockApi implements TreoMockApi
      */
     constructor(
         private _treoMockApiService: TreoMockApiService
-    )
-    {
+    ) {
         // Set the data
         this._crypto = cryptoData;
 
@@ -35,8 +33,7 @@ export class CryptoMockApi implements TreoMockApi
     /**
      * Register
      */
-    register(): void
-    {
+    register(): void {
         // -----------------------------------------------------------------------------------------------------
         // @ Crypto - GET
         // -----------------------------------------------------------------------------------------------------
