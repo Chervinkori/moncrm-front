@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError, switchMap} from 'rxjs/operators';
-import {ResponseBackend} from '../../interface/response-backend';
+import {SuccessResponse} from '../../interface/response-backend';
 import {JwtUtils} from '../../util/jwt.utils';
 
 @Injectable()
@@ -41,7 +41,7 @@ export class AuthService {
      */
     signIn(credentials: { email: string, password: string }): Observable<any> {
         return this._httpClient.post('backend/auth/sign-in', credentials).pipe(
-            switchMap((response: ResponseBackend) => {
+            switchMap((response: SuccessResponse) => {
                 this.accessToken = response.data.access_token;
                 // Включает обновление токена доступа
                 this.enableRefreshAccessToken = true;
@@ -57,7 +57,7 @@ export class AuthService {
     refreshAccessToken(): Observable<boolean> {
         // Renew token
         return this._httpClient.post('backend/auth/refresh-access-token', {}).pipe(
-            switchMap((response: ResponseBackend) => {
+            switchMap((response: SuccessResponse) => {
                 this.accessToken = response.data.access_token;
                 // Включает обновление токена доступа
                 this.enableRefreshAccessToken = true;

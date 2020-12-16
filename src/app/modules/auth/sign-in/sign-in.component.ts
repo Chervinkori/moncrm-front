@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TreoAnimations} from '@treo/animations';
 import {AuthService} from 'app/core/auth/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -43,9 +43,9 @@ export class AuthSignInComponent implements OnInit {
     ngOnInit(): void {
         // Create the form
         this.signInForm = this._formBuilder.group({
-            email: ['chervinko@moncrm.com'],
-            password: ['12qwaszx'],
-            rememberMe: ['']
+            email: [null, [Validators.required, Validators.email]],
+            password: [null, Validators.required],
+            rememberMe: [null]
         });
     }
 
@@ -57,11 +57,16 @@ export class AuthSignInComponent implements OnInit {
      * Sign in
      */
     signIn(): void {
-        // Disable the form
-        this.signInForm.disable();
-
         // Hide the message
         this.message = null;
+
+        // Do nothing if the form is invalid
+        if (this.signInForm.invalid) {
+            return;
+        }
+
+        // Disable the form
+        this.signInForm.disable();
 
         // Get the credentials
         const credentials = this.signInForm.value;
@@ -87,10 +92,11 @@ export class AuthSignInComponent implements OnInit {
                 // Show the error message
                 this.message = {
                     appearance: 'outline',
+                    title: 'Ошибка авторизации',
                     content: response.error.message,
                     shake: true,
                     showIcon: false,
-                    type: 'error'
+                    type: 'warn'
                 };
             });
     }

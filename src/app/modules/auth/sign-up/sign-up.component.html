@@ -13,11 +13,10 @@
                 </div>
 
                 <!-- Title -->
-                <div class="title">Sign up</div>
+                <div class="title">Регистрация</div>
                 <div class="subtitle">
-                    <span>Already have an account?</span>
-                    <a class="link"
-                       [routerLink]="['/sign-in']">Sign in</a>
+                    <span>Уже есть аккаунт?</span>
+                    <a class="link" [routerLink]="['/sign-in']">Авторизация</a>
                 </div>
 
                 <!-- Message -->
@@ -26,77 +25,77 @@
                               [showIcon]="message.showIcon"
                               [type]="message.type"
                               [@shake]="message.shake">
+                    <span treoMessageTitle *ngIf="message.title">{{message.title}}</span>
                     {{message.content}}
                 </treo-message>
 
                 <!-- Sign Up form -->
                 <form [formGroup]="signUpForm">
 
-                    <!-- Name field -->
+                    <!-- Lastname field -->
                     <mat-form-field>
-                        <mat-label>Full name</mat-label>
-                        <input id="name"
-                               matInput
-                               [formControlName]="'name'">
-                        <mat-error *ngIf="signUpForm.get('name').hasError('required')">
-                            Full name is required
+                        <mat-label>Фамилия</mat-label>
+                        <input id="lastname" matInput [formControlName]="'lastname'" required>
+                        <mat-error *ngIf="signUpForm.get('lastname').hasError('required')">
+                            Поле обязательно для заполнения
+                        </mat-error>
+                    </mat-form-field>
+
+                    <!-- Firstname field -->
+                    <mat-form-field>
+                        <mat-label>Имя</mat-label>
+                        <input id="firstname" matInput [formControlName]="'firstname'" required>
+                        <mat-error *ngIf="signUpForm.get('firstname').hasError('required')">
+                            Поле обязательно для заполнения
+                        </mat-error>
+                    </mat-form-field>
+
+                    <!-- Middlename field -->
+                    <mat-form-field>
+                        <mat-label>Отчество</mat-label>
+                        <input id="middlename" matInput [formControlName]="'middlename'">
+                        <mat-error *ngIf="signUpForm.get('middlename').hasError('required')">
+                            Поле обязательно для заполнения
                         </mat-error>
                     </mat-form-field>
 
                     <!-- Email field -->
                     <mat-form-field>
-                        <mat-label>Email address</mat-label>
-                        <input id="email"
-                               matInput
-                               [formControlName]="'email'">
+                        <mat-label>Электронная почта</mat-label>
+                        <input id="email" matInput [formControlName]="'email'" required>
                         <mat-error *ngIf="signUpForm.get('email').hasError('required')">
-                            Email address is required
+                            Поле обязательно для заполнения
                         </mat-error>
                         <mat-error *ngIf="signUpForm.get('email').hasError('email')">
-                            Please enter a valid email address
+                            Пожалуйста, введите действительный адрес электронной почты
                         </mat-error>
                     </mat-form-field>
 
                     <!-- Password field -->
                     <mat-form-field>
-                        <mat-label>Password</mat-label>
-                        <input id="password"
-                               matInput
-                               type="password"
-                               [formControlName]="'password'"
+                        <mat-label>Пароль</mat-label>
+                        <input id="password" matInput type="password" [formControlName]="'password'" required
                                #passwordField>
-                        <button mat-icon-button
-                                type="button"
+                        <button mat-icon-button type="button"
                                 (click)="passwordField.type === 'password' ? passwordField.type = 'text' : passwordField.type = 'password'"
                                 matSuffix>
-                            <mat-icon *ngIf="passwordField.type === 'password'"
-                                      [svgIcon]="'visibility'"></mat-icon>
-                            <mat-icon *ngIf="passwordField.type === 'text'"
-                                      [svgIcon]="'visibility_off'"></mat-icon>
+                            <mat-icon *ngIf="passwordField.type === 'password'" [svgIcon]="'visibility'"></mat-icon>
+                            <mat-icon *ngIf="passwordField.type === 'text'" [svgIcon]="'visibility_off'"></mat-icon>
                         </button>
                         <mat-error>
-                            Password is required
+                            Поле обязательно для заполнения
                         </mat-error>
-                    </mat-form-field>
-
-                    <!-- Company field -->
-                    <mat-form-field>
-                        <mat-label>Company</mat-label>
-                        <input id="company-confirm"
-                               matInput
-                               [formControlName]="'company'">
                     </mat-form-field>
 
                     <!-- Field footer -->
                     <div class="field-footer">
                         <mat-checkbox [color]="'primary'"
                                       [formControlName]="'agreements'">
-                            <span>I agree to the</span>
-                            <a class="link"
-                               [routerLink]="['./']">Terms of Service</a>
-                            <span>and</span>
-                            <a class="link"
-                               [routerLink]="['./']">Privacy Policy</a>
+                            <span>Я ознакомлен и согласен с</span>
+                            <a class="link" [routerLink]="['./']">Условиями использования</a>
+                            <mat-error *ngIf="signUpForm.get('agreements').hasError('required')" class="text-sm">
+                                Необходимо принять условия использования
+                            </mat-error>
                         </mat-checkbox>
                     </div>
 
@@ -107,7 +106,7 @@
                             [disabled]="signUpForm.disabled"
                             (click)="signUp()">
                         <span *ngIf="!signUpForm.disabled">
-                            Create your free account
+                            Зарегистрироваться
                         </span>
                         <mat-progress-spinner *ngIf="signUpForm.disabled"
                                               [diameter]="24"
@@ -135,17 +134,17 @@
 
             <div class="content">
                 <div class="title">
-                    <span>Well-crafted,</span>
-                    <span>Coded with attention,</span>
-                    <span>Build with passion.</span>
+                    <span>Lorem ipsum</span>
+                    <span>Dolor sit amet,</span>
+                    <span>Consectetur adipiscing.</span>
                 </div>
                 <div class="description">
-                    Treo helps developers to build organized and well-coded admin dashboards full of beautiful and
-                    feature rich modules.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.
                 </div>
                 <button class="learn-more-button"
                         mat-stroked-button>
-                    Learn more
+                    Lorem ipsum
                 </button>
             </div>
 

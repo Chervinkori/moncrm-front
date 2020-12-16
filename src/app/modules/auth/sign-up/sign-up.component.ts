@@ -3,6 +3,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {TreoAnimations} from '@treo/animations';
 import {AuthService} from 'app/core/auth/auth.service';
+import {HttpClient} from '@angular/common/http';
+import {ErrorResponse, SuccessResponse} from '../../../interface/response-backend';
+import {finalize} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'auth-sign-up',
@@ -18,15 +22,11 @@ export class AuthSignUpComponent implements OnInit, OnDestroy {
     // Private
     private _unsubscribeAll: Subject<any>;
 
-    /**
-     * Constructor
-     *
-     * @param {AuthService} _authService
-     * @param {FormBuilder} _formBuilder
-     */
     constructor(
         private _authService: AuthService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private _httpClient: HttpClient,
+        private _router: Router
     ) {
         // Set the defaults
         this.message = null;
@@ -45,11 +45,12 @@ export class AuthSignUpComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         // Create the form
         this.signUpForm = this._formBuilder.group({
-                name: ['', Validators.required],
-                email: ['', [Validators.required, Validators.email]],
-                password: ['', Validators.required],
-                company: [''],
-                agreements: ['', Validators.requiredTrue]
+                lastname: [null, Validators.required],
+                firstname: [null, Validators.required],
+                middlename: [null],
+                email: [null, [Validators.required, Validators.email]],
+                password: [null, Validators.required],
+                agreements: [null, Validators.requiredTrue] // TODO
             }
         );
     }
@@ -71,6 +72,9 @@ export class AuthSignUpComponent implements OnInit, OnDestroy {
      * Sign up
      */
     signUp(): void {
+        // Hide the message
+        this.message = null;
+
         // Do nothing if the form is invalid
         if (this.signUpForm.invalid) {
             return;
@@ -79,28 +83,29 @@ export class AuthSignUpComponent implements OnInit, OnDestroy {
         // Disable the form
         this.signUpForm.disable();
 
-        // Hide the message
-        this.message = null;
-
-        // Do your action here...
-
-        // Emulate server delay
-        setTimeout(() => {
-
-            // Re-enable the form
-            this.signUpForm.enable();
-
-            // Reset the form
-            this.signUpForm.reset({});
-
-            // Show the message
-            this.message = {
-                appearance: 'outline',
-                content: 'Your account has been created and a confirmation mail has been sent to your email address.',
-                shake: false,
-                showIcon: false,
-                type: 'success'
-            };
-        }, 1000);
+        // TODO
+        this._httpClient.post('backend/auth/register', this.signUpForm.value).pipe(
+            finalize(() => {
+                // Re-enable the form
+                this.signUpForm.enable();
+            })
+        ).subscribe(
+            (response: SuccessResponse) => {
+                // Reset the form
+                this.signUpForm.reset({});
+                // Переход
+                this._router.navigate(['confirmation-required']);
+            },
+            (response: ErrorResponse) => {
+                this.message = {
+                    appearance: 'outline',
+                    title: 'Ошибка регистрации',
+                    content: response.error.data[0].message ?? response.error.message, // TODO: сделать автоматический вывод ошибок валидации
+                    shake: true,
+                    showIcon: false,
+                    type: 'warn'
+                };
+            }
+        );
     }
 }
