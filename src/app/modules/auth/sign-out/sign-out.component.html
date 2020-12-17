@@ -13,28 +13,24 @@
                 </div>
 
                 <!-- Title -->
-                <div class="title">You have signed out!</div>
-                <div class="subtitle">
+                <div class="title">Выход из аккаунта</div>
 
+                <div class="description">
                     <!-- Redirect countdown -->
                     <ng-container *ngIf="countdown > 0">
-                        Redirecting in {{countdown | i18nPlural: countdownMapping }}
+                        Выход произойдет через {{countdown | i18nPlural: countdownMapping }}.
                     </ng-container>
 
                     <!-- Redirect message -->
                     <ng-container *ngIf="countdown === 0">
-                        You are now being redirected!
+                        Будем рады видеть Вас снова ;)
                     </ng-container>
-
                 </div>
 
-                <!-- Form footer -->
-                <div class="form-footer">
-                    <span>Go to</span>
-                    <a class="link"
-                       [routerLink]="['/sign-in']">sign in</a>
-                </div>
-
+                <button class="submit-button treo-mat-button-large" mat-raised-button [color]="'primary'"
+                        (click)="cancelSignOut()">
+                    Отменить выход
+                </button>
             </div>
 
         </div>

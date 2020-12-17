@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
-import {interval, Subject} from 'rxjs';
+import {interval, Subject, Subscription} from 'rxjs';
 import {take, takeUntil} from 'rxjs/operators';
 import {AuthService} from 'app/core/auth/auth.service';
 
@@ -13,6 +13,8 @@ import {AuthService} from 'app/core/auth/auth.service';
 export class AuthSignOutComponent implements OnInit, OnDestroy {
     countdown: number;
     countdownMapping: any;
+
+    private subscription: Subscription;
 
     // Private
     private _unsubscribeAll: Subject<any>;
@@ -33,8 +35,8 @@ export class AuthSignOutComponent implements OnInit, OnDestroy {
         // Set the defaults
         this.countdown = 5;
         this.countdownMapping = {
-            '=1': '# second',
-            'other': '# seconds'
+            '=1': '# секунда',
+            'other': '# секунд'
         };
     }
 
@@ -46,14 +48,11 @@ export class AuthSignOutComponent implements OnInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
-        // Sign out
-        this._authService.signOut();
-
         // Get the duration
         const duration = this.countdown;
 
         // Redirect after the countdown
-        interval(1000)
+        this.subscription = interval(1000)
             .pipe(
                 take(duration),
                 takeUntil(this._unsubscribeAll)
@@ -64,9 +63,18 @@ export class AuthSignOutComponent implements OnInit, OnDestroy {
                 () => {
                 },
                 () => {
+                    // Sign out
+                    this._authService.signOut();
+                    // Переход
                     this._router.navigate(['sign-in']);
                 }
             );
+    }
+
+    cancelSignOut(): void {
+        this.subscription.unsubscribe();
+        // Переход
+        this._router.navigate(['signed-in-redirect']);
     }
 
     /**

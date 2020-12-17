@@ -50,7 +50,7 @@ export class AuthSignUpComponent implements OnInit, OnDestroy {
                 middlename: [null],
                 email: [null, [Validators.required, Validators.email]],
                 password: [null, Validators.required],
-                agreements: [null, Validators.requiredTrue] // TODO
+                agreements: [true, Validators.requiredTrue] // TODO
             }
         );
     }
@@ -83,7 +83,7 @@ export class AuthSignUpComponent implements OnInit, OnDestroy {
         // Disable the form
         this.signUpForm.disable();
 
-        // TODO
+        // TODO: перенести в сервис (!)
         this._httpClient.post('backend/auth/register', this.signUpForm.value).pipe(
             finalize(() => {
                 // Re-enable the form
